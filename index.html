@@ -1,3 +1,4 @@
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <link rel="icon" href="src/icon-hania-os.png" type="image/jpeg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -247,6 +248,92 @@
   .marquee{overflow:hidden;white-space:nowrap;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--terracotta);color:var(--beige);padding:.6rem 0;font-size:.75rem;letter-spacing:.2em;font-weight:700;font-family:var(--mono)}
   .marquee span{display:inline-block;padding:0 1.5rem;animation:mq 22s linear infinite}
   @keyframes mq{to{transform:translateX(-50%)}}
+
+  /* mobile fit + touch comfort */
+  @media(max-width:600px){
+    html{scroll-padding-top:4.5rem}
+    body{padding-bottom:6.25rem}
+    .shell{padding-left:1rem;padding-right:1rem}
+    .section{padding:1.35rem 0}
+    .hero.section{padding-top:1rem;padding-bottom:1.25rem}
+    .hero-win{margin:.25rem auto 0;transform:none}
+    .win{border-radius:12px}
+    .win-body{padding:1.05rem}
+    .win-bar{padding:.5rem .7rem;gap:.45rem}
+    .win-title{font-size:.64rem;max-width:70%;text-align:center}
+    .display-xl{font-size:clamp(2.25rem,10vw,3.25rem);line-height:1.04}
+    .display-lg{font-size:clamp(1.75rem,7.5vw,2.25rem);line-height:1.12}
+    .hero-sub{font-size:.98rem;line-height:1.65}
+    .avail{font-size:.7rem;padding:.42rem .75rem;max-width:100%;transform:none}
+    .cta-row{display:grid;grid-template-columns:1fr;gap:.6rem;margin-top:1.15rem}
+    .cta-row .btn{width:100%;justify-content:center;min-height:2.85rem}
+    .hero-meta{grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem .6rem;font-size:.8rem}
+    .hero-meta li{min-width:0}
+    .sec-head{align-items:flex-start;gap:.65rem;margin-bottom:1.1rem}
+    .filters{gap:.4rem;margin-bottom:1rem}
+    .fbtn{padding:.48rem .8rem;font-size:.72rem;min-height:2.6rem}
+    .grid-work{grid-template-columns:minmax(0,1fr);gap:.85rem}
+    .card{padding:.9rem}
+    .card h3{font-size:1.2rem}
+    .about-grid{gap:1.1rem}
+    .portrait-wrap{max-width:19rem;margin:0 auto;width:100%}
+    .chip{font-size:.61rem;padding:.3rem .55rem}
+    .chip.c1{left:0}
+    .chip.c2{right:0}
+    .quote{font-size:clamp(1.35rem,6vw,1.8rem)}
+    .term{font-size:.78rem;line-height:1.8;padding:1rem;overflow-wrap:anywhere}
+    #termInput{width:58%;max-width:58%;font-size:16px}
+    .notif{padding:.75rem;gap:.55rem}
+    .notif time{font-size:.62rem}
+    .jrow{gap:.65rem;padding:.85rem}
+    .jrow .t b{font-size:1rem}
+    .paper{padding:1.7rem 1rem}
+    #contact .win{width:100%}
+    #contact p.sub{font-size:.98rem}
+    .contact-row{display:grid;grid-template-columns:1fr;gap:.6rem;margin-top:1.2rem}
+    .contact-row .btn{width:100%;justify-content:center}
+    .copies{gap:.45rem}
+    .dock{
+      left:50%;bottom:max(.5rem,env(safe-area-inset-bottom));
+      width:calc(100% - 1.25rem);max-width:25rem;
+      justify-content:space-around;gap:.15rem;padding:.35rem .4rem;
+      border-radius:16px
+    }
+    .dock a{flex:1;min-width:0;height:2.7rem;padding:0 .2rem;font-size:.66rem;border-radius:10px}
+    #modal{padding:.55rem;align-items:flex-end}
+    #modalBox{max-height:88dvh;border-radius:14px 14px 10px 10px}
+    #modalBox .mbody{padding:1.1rem 1rem 1.35rem}
+    #modalBox h3{font-size:1.4rem}
+    #modalActions{gap:.5rem}
+    #modalActions .btn{flex:1;justify-content:center;min-width:8rem}
+    #admin{padding:.5rem;align-items:flex-start}
+    #adminBox{max-height:94dvh;border-radius:12px}
+    #adminBox .mbody{padding:1rem}
+    #adminBox h3{font-size:1.3rem}
+    .arow{flex-wrap:wrap;gap:.55rem;padding:.65rem}
+    .arow .t{flex-basis:100%}
+    .arowbtns{width:100%}
+    .arowbtns .abtn{flex:1;min-height:2.5rem}
+    .abtnrow .abtn{min-height:2.6rem}
+    .fridge-grid{grid-template-columns:repeat(auto-fit,minmax(125px,1fr))}
+    .fridge-form{flex-direction:column}
+    .fridge-form input,.fridge-form button{width:100%;min-height:2.8rem}
+    .fgrid{gap:1.1rem}
+    .fbottom{font-size:.72rem!important}
+    a,button{touch-action:manipulation}
+  }
+  @media(max-width:360px){
+    .shell{padding-left:.8rem;padding-right:.8rem}
+    .sysicons{gap:.45rem;font-size:.64rem}
+    .logo{font-size:1.02rem}
+    .display-xl{font-size:2.15rem}
+    .hero-meta{font-size:.74rem}
+    .dock a{font-size:.6rem}
+    .win-body{padding:.9rem}
+  }
+  @media(prefers-reduced-motion:reduce){
+    *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  }
 </style>
 
 <div id="boot"><div class="box"><div class="logo">✦ Hania OS <span style="font-family:var(--mono);font-size:.9rem">v2.0</span></div><div class="bar"><i></i></div><p>loading pixels… arranging chai…</p><p id="bootCity"></p></div></div>
