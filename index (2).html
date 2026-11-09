@@ -1,0 +1,1060 @@
+<link rel="icon" href="src/icon-hania-os.png" type="image/jpeg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --sage:#8f9d70; --rose:#b96858; --tan:#d5a45f; --beige:#f1dfc4;
+    --terracotta:#795236; --ivory:#dfccb1; --cream:#e8cfa9;
+    --sage-deep:#607044; --muted:#65513e; --border:#c6a06f;
+    --ink:#2e1f13; --paper:#fdf6ea;
+    --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,monospace;
+    --shadow:0 2px 5px #84604414, 0 16px 34px -20px #84604447;
+  }
+  *{box-sizing:border-box}
+  body{text-align:left;background:var(--beige);color:var(--terracotta);font-family:"DM Sans",system-ui,sans-serif;margin:0;-webkit-font-smoothing:antialiased;overflow-x:hidden;padding-bottom:5rem}
+  h1,h2,h3,.serif{font-family:"Fraunces",Georgia,serif;letter-spacing:-.018em;font-weight:500}
+  ::selection{background:var(--rose);color:var(--beige)}
+  a{color:inherit}
+  .shell{width:100%;max-width:1200px;margin:0 auto;padding:0 1.25rem}
+  @media(min-width:640px){.shell{padding:0 2rem}}
+  @media(min-width:1024px){.shell{padding:0 3.5rem}}
+  .eyebrow{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;opacity:.85;font-family:var(--mono)}
+  .display-xl{font-size:clamp(2.8rem,7vw,5rem);line-height:1.02;margin:0}
+  .display-lg{font-size:clamp(1.9rem,4vw,2.9rem);line-height:1.08;margin:0}
+
+  /* wallpaper */
+  main.wallpaper{background-image:radial-gradient(#84604414 1px,transparent 1px);background-size:18px 18px}
+
+  /* boot */
+  #boot{position:fixed;inset:0;background:var(--beige);z-index:200;display:flex;align-items:center;justify-content:center;transition:opacity .4s;cursor:pointer}
+  #boot.done{opacity:0;pointer-events:none}
+  #boot .box{text-align:center}
+  #boot .logo{font-family:"Fraunces",serif;font-size:2rem}
+  #boot .bar{width:220px;height:8px;border:1px solid var(--border);border-radius:99px;margin:1rem auto 0;overflow:hidden;background:var(--paper)}
+  #boot .bar i{display:block;height:100%;width:30%;background:var(--terracotta);border-radius:99px;animation:load 1s ease-in-out infinite}
+  @keyframes load{0%{margin-left:-30%}100%{margin-left:100%}}
+  #boot p{font-family:var(--mono);font-size:.72rem;color:var(--muted);margin:.8rem 0 0}
+
+  /* menu bar */
+  header.top{position:sticky;top:0;z-index:50;border-bottom:1px solid var(--border);background:#fbf0daee;backdrop-filter:blur(8px)}
+  .navwrap{display:flex;align-items:center;justify-content:space-between;height:3.5rem;gap:1rem}
+  .logo{font-family:"Fraunces",serif;font-size:1.15rem;font-weight:500;letter-spacing:.04em;text-decoration:none;white-space:nowrap}
+  #appName{font-family:var(--mono);font-size:.72rem;font-weight:700;color:var(--muted);display:none}
+  @media(min-width:768px){#appName{display:block}}
+  .sysicons{display:flex;align-items:center;gap:.9rem;font-family:var(--mono);font-size:.72rem;font-weight:700;color:var(--muted);white-space:nowrap}
+  nav.desk{display:none}
+  @media(min-width:768px){nav.desk{display:block}}
+  nav.desk ul{display:flex;gap:1.6rem;list-style:none;margin:0;padding:0}
+  nav.desk a{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;text-decoration:none;opacity:.8;font-family:var(--mono)}
+  nav.desk a:hover{opacity:1;color:var(--rose)}
+  .burger{width:2.5rem;height:2.5rem;display:flex;align-items:center;justify-content:center;background:none;border:0;cursor:pointer;position:relative}
+  @media(min-width:768px){.burger{display:none}}
+  .burger span{position:absolute;height:2px;width:22px;background:var(--terracotta);transition:.3s}
+  .burger span:nth-child(1){transform:translateY(-4px)} .burger span:nth-child(2){transform:translateY(4px)}
+  .burger.open span:nth-child(1){transform:rotate(45deg)} .burger.open span:nth-child(2){transform:rotate(-45deg)}
+  #mobileNav{display:none;border-top:1px solid var(--border);padding:.5rem 1.25rem 1.2rem;background:var(--beige)}
+  #mobileNav.open{display:block}
+  #mobileNav a{display:block;padding:.7rem 0;text-decoration:none;font-weight:700;font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;font-family:var(--mono)}
+
+  /* windows */
+  .section{padding:2.2rem 0}
+  .win{background:var(--paper);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow);overflow:hidden}
+  .win-bar{display:flex;align-items:center;gap:.6rem;background:#eadbc2;border-bottom:1px solid var(--border);padding:.55rem .9rem}
+  .lights{display:flex;gap:6px}
+  .lights i{width:11px;height:11px;border-radius:50%;display:block}
+  .lights i:nth-child(1){background:var(--rose)} .lights i:nth-child(2){background:var(--tan)} .lights i:nth-child(3){background:var(--sage)}
+  .win-title{font-family:var(--mono);font-size:.72rem;font-weight:700;margin:0 auto;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .win-body{padding:1.4rem}
+  @media(min-width:768px){.win-body{padding:2rem}}
+  .sec-head{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:1rem;margin-bottom:1.5rem}
+  .link-quiet{text-decoration:none;border-bottom:1px solid #79523655}
+  .link-more{font-size:.9rem;font-weight:500;text-decoration:none;display:inline-flex;gap:.5rem;align-items:center}
+  .link-more span.u{border-bottom:1px solid #79523655}
+
+  /* hero */
+  .hero-win{max-width:56rem;margin:1.5rem auto 0;transform:rotate(-.4deg)}
+  .hero-copy{position:relative;z-index:2}
+  .hello-note{font-family:"Fraunces",serif;font-style:italic;color:var(--rose);margin-bottom:.6rem;display:block}
+  .hero h1 em{color:var(--sage-deep);font-style:italic}
+  .hero-sub{max-width:34rem;color:var(--muted);line-height:1.6;font-size:1.05rem}
+  .cta-row{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.5rem}
+  .btn{display:inline-flex;align-items:center;height:2.75rem;padding:0 1.4rem;border-radius:99px;font-size:.9rem;font-weight:500;text-decoration:none;transition:.2s;cursor:pointer;border:0}
+  .btn-solid{background:var(--terracotta);color:var(--beige);box-shadow:var(--shadow)}
+  .btn-solid:hover{transform:translateY(-2px) rotate(-1deg);background:#65452d}
+  .btn-line{border:1px solid #79523673;background:#d5a45f33}
+  .btn-line:hover{transform:translateY(-2px) rotate(1deg);background:#d5a45f59}
+  .avail{display:inline-flex;align-items:center;gap:.5rem;background:#d5a45f33;border:1px solid var(--border);border-radius:99px;padding:.45rem 1rem;font-size:.82rem;font-weight:700;color:var(--terracotta);margin-top:1.1rem;transform:rotate(-1deg);font-family:var(--mono)}
+  .avail .dot{width:8px;height:8px;border-radius:50%;background:#4d7c4d;animation:pulse 2s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 #4d7c4d66}70%{box-shadow:0 0 0 8px transparent}100%{box-shadow:0 0 0 0 transparent}}
+  .hero-meta{display:grid;grid-template-columns:repeat(2,1fr);gap:.5rem 1.5rem;border-top:1px solid #79523640;padding-top:1.25rem;margin-top:1.5rem;font-size:.9rem;color:var(--muted);list-style:none;padding-left:0;font-family:var(--mono)}
+  @media(min-width:640px){.hero-meta{grid-template-columns:repeat(4,1fr)}}
+  .hero-meta .n{font-size:.7rem;letter-spacing:.14em;font-weight:700;margin-right:.5rem}
+
+  /* work */
+  .filters{display:flex;gap:.5rem;flex-wrap:wrap;margin:0 0 1.4rem}
+  .fbtn{border:1px solid var(--border);background:transparent;border-radius:99px;padding:.45rem 1rem;font-size:.8rem;font-weight:700;cursor:pointer;color:var(--terracotta);font-family:var(--mono)}
+  .fbtn.active{background:var(--terracotta);color:var(--beige);border-color:var(--terracotta)}
+  .grid-work{display:grid;gap:1.1rem}
+  @media(min-width:700px){.grid-work{grid-template-columns:repeat(2,1fr)}}
+  @media(min-width:1024px){.grid-work{grid-template-columns:repeat(3,1fr)}}
+  .card{background:var(--cream);border:1px solid #79523633;border-radius:12px;padding:1.1rem;box-shadow:var(--shadow);transition:.25s;position:relative;overflow:hidden}
+  .card:hover{transform:translateY(-4px) rotate(-.4deg)}
+  .card .kind{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--sage-deep);font-family:var(--mono)}
+  .card h3{margin:.5rem 0;font-size:1.25rem;line-height:1.2}
+  .card p{font-size:.9rem;color:var(--muted);line-height:1.6;margin:.4rem 0 .8rem}
+  .pill{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border-radius:99px;padding:.2rem .7rem;margin-right:.4rem;font-family:var(--mono)}
+  .pill.live{background:#607044;color:#f1dfc4} .pill.building{background:var(--tan);color:#4a3018}
+  .stack{font-size:.78rem;color:var(--muted);margin-top:.6rem}
+  .thumb{display:block;border-radius:10px;overflow:hidden;margin-bottom:.9rem;border:1px solid #79523633}
+  .thumb img{width:100%;display:block;aspect-ratio:16/10;object-fit:cover;object-position:top center;transition:.3s}
+  .card:hover .thumb img{transform:scale(1.03)}
+  .preview-hint{font-family:var(--mono);font-size:.68rem;font-weight:700;letter-spacing:.12em;color:var(--muted);margin:.1rem 0 .55rem;opacity:.9}
+
+  /* about */
+  .about-grid{display:grid;gap:1.6rem}
+  @media(min-width:900px){.about-grid{grid-template-columns:1fr 2fr;gap:2.5rem}}
+  .portrait{border-radius:12px;overflow:hidden;border:1px solid var(--border);background:var(--cream);box-shadow:var(--shadow)}
+  .portrait img{width:100%;display:block;aspect-ratio:4/5;object-fit:cover;object-position:center 15%;filter:sepia(.18)}
+  .portrait-wrap{position:relative}
+  .chip{position:absolute;font-size:.68rem;font-weight:700;background:var(--paper);border:1px solid var(--border);border-radius:99px;padding:.35rem .75rem;box-shadow:var(--shadow);white-space:nowrap;z-index:2;animation:floaty 5s ease-in-out infinite;font-family:var(--mono)}
+  .chip.c1{top:6%;left:-6px;transform:rotate(-5deg)}
+  .chip.c2{top:44%;right:-6px;transform:rotate(4deg);animation-delay:1.2s}
+  .chip.c3{bottom:16%;left:4%;transform:rotate(-3deg);animation-delay:2.4s}
+  @keyframes floaty{0%,100%{margin-top:0}50%{margin-top:-8px}}
+  .quote{font-family:"Fraunces",serif;font-size:clamp(1.4rem,3vw,2.2rem);line-height:1.35;margin:0}
+  .about-bio{color:var(--muted);line-height:1.75}
+  .skillpills{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
+  .skillpills span{border:1px solid var(--border);background:#f1dfc488;border-radius:99px;padding:.35rem .9rem;font-size:.82rem;font-family:var(--mono)}
+
+  /* terminal */
+  .term{background:var(--ink);color:#e8d9bd;border-radius:0;font-family:var(--mono);font-size:.88rem;line-height:1.9;padding:1.4rem}
+  @media(min-width:768px){.term{padding:1.8rem 2rem}}
+  .term .p{color:var(--tan)}
+  .term .g{color:#9db37e}
+  .term .dim{color:#a68a67}
+  .term .cursor{display:inline-block;width:.6em;height:1.1em;background:#e8d9bd;vertical-align:-2px;animation:blink 1s steps(1) infinite}
+  @keyframes blink{50%{opacity:0}}
+  .notifs{display:grid;gap:.7rem;margin-top:1.6rem}
+  .notif{background:var(--paper);border:1px solid var(--border);border-radius:14px;padding:.8rem 1rem;box-shadow:var(--shadow);display:flex;gap:.7rem;align-items:flex-start;transform:rotate(-.6deg);font-family:"DM Sans",sans-serif}
+  .notif:nth-child(3){transform:rotate(.5deg)}
+  .notif:nth-child(4){transform:rotate(-.3deg)}
+  .notif .app{width:2.2rem;height:2.2rem;border-radius:9px;background:var(--terracotta);color:var(--beige);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.9rem;flex-shrink:0;font-family:var(--mono)}
+  .notif b{font-size:.85rem}
+  .notif p{margin:.15rem 0 0;font-size:.82rem;color:var(--muted);line-height:1.5}
+  .notif time{font-size:.68rem;color:var(--muted);font-family:var(--mono);margin-left:auto;flex-shrink:0}
+
+  /* journal */
+  .jrows{display:grid;gap:.7rem}
+  .jrow{display:flex;align-items:center;gap:.9rem;background:var(--cream);border:1px solid #79523633;border-radius:12px;padding:.95rem 1.1rem;cursor:pointer;transition:.2s;text-align:left;width:100%;max-width:100%;min-width:0;overflow:hidden;font:inherit;color:inherit}
+  .jrow:hover{transform:translateX(4px);background:#f3e2c6}
+  .jrow .file{font-size:1.3rem}
+  .jrow .t{flex:1;min-width:0}
+  .jrow .t b{display:block;font-family:"Fraunces",serif;font-size:1.1rem;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .jrow .t span{font-family:var(--mono);font-size:.7rem;color:var(--sage-deep);font-weight:700}
+  .jrow .go{font-family:var(--mono);color:var(--muted)}
+  .paper{background:#eadbc2;background-image:radial-gradient(#84604412 1px,transparent 1px);background-size:14px 14px;border:1px solid var(--border);border-radius:8px;padding:2.5rem 1.5rem;text-align:center;margin-top:1.4rem}
+
+  /* now + contact */
+  .now-flex{display:flex;gap:1.2rem;flex-direction:column}
+  @media(min-width:768px){.now-flex{flex-direction:row;align-items:center}.now-flex .eyebrow{width:12rem;flex-shrink:0}}
+  #contact .win{max-width:44rem;margin:0 auto;text-align:center}
+  #contact p.sub{max-width:28rem;margin:1rem auto 0;color:var(--muted);font-size:1.05rem}
+  .contact-row{display:flex;flex-wrap:wrap;justify-content:center;gap:.8rem;margin-top:1.8rem}
+  .btn-big{height:3rem;padding:0 1.6rem;font-size:.95rem}
+  .copies{display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap;margin-top:1rem}
+
+  /* footer + dock */
+  footer{padding:2rem 0 .5rem}
+  .fgrid{display:grid;gap:1.5rem}
+  @media(min-width:800px){.fgrid{grid-template-columns:1.4fr 1fr 1fr}}
+  .fgrid ul{list-style:none;margin:0;padding:0;display:grid;gap:.5rem;font-size:.9rem;font-family:var(--mono)}
+  .fgrid a{text-decoration:none}
+  .fgrid a:hover{color:var(--rose)}
+  .dock{position:fixed;bottom:.9rem;left:50%;transform:translateX(-50%);display:flex;gap:.3rem;background:#fdf6eadd;border:1px solid var(--border);border-radius:18px;padding:.45rem .6rem;box-shadow:var(--shadow);z-index:90;backdrop-filter:blur(8px)}
+  .dock a{min-width:2.6rem;height:2.6rem;border-radius:12px;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:.75rem;font-weight:700;font-family:var(--mono);border:1px solid transparent;padding:0 .55rem;color:var(--terracotta)}
+  .dock a:hover{background:#d5a45f33}
+  .dock a.active{background:var(--terracotta);color:var(--beige)}
+
+  /* modal */
+  #modal{position:fixed;inset:0;background:#3a2415aa;display:none;align-items:center;justify-content:center;padding:1rem;z-index:99}
+  #modal.open{display:flex}
+  #modalBox{background:var(--paper);border-radius:14px;max-width:38rem;width:100%;max-height:85vh;overflow:auto;padding:0;border:1px solid var(--border)}
+  #modalBox .win-bar{position:sticky;top:0}
+  #modalBox .mbody{padding:1.6rem 1.6rem 2rem}
+  #modalBox h3{font-size:1.6rem;margin:.4rem 0}
+  #modalBox .body{color:#4c3d2f;line-height:1.8}
+  #modalBox .story h4{font-family:var(--mono);font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--sage-deep);margin:1.3rem 0 .4rem}
+  #modalBox .story p{margin:.3rem 0;line-height:1.75}
+  #modalBox .story ul{margin:.3rem 0;padding-left:1.2rem;line-height:1.75}
+
+  /* invisible layer: boot line, late mood, presence, terminal input */
+  #hereNow{display:none}
+  #heroWordEl{transition:opacity .35s;display:inline-block}
+  @media(min-width:768px){#hereNow{display:inline}}
+  body.late{--beige:#e8cba6;--paper:#f4dfbe;--cream:#ddbd95;--ivory:#d3b58c}
+  .term a{color:var(--tan)}
+  #termInput{background:transparent;border:0;outline:0;color:#e8d9bd;font-family:var(--mono);font-size:16px;width:65%;caret-color:#e8d9bd;padding:0}
+  #termLog div{overflow-wrap:anywhere}
+  /* click-deep layer: receipts, quote cards, fridge */
+  .receipt{background:#fdf6ea;border:1px dashed #79523688;border-radius:10px;padding:1.4rem;font-family:var(--mono);font-size:.82rem;color:var(--terracotta);max-width:22rem;margin:0 auto}
+  .receipt h4{font-family:var(--mono);text-align:center;letter-spacing:.2em;margin:0 0 .3rem;font-size:.95rem}
+  .receipt .rc{text-align:center;opacity:.75;font-size:.72rem;line-height:1.6}
+  .receipt hr{border:0;border-top:1px dashed #79523688;margin:.8rem 0}
+  .receipt .rr{display:flex;justify-content:space-between;gap:1rem;padding:.15rem 0;text-align:right}
+  .receipt .rr span:first-child{opacity:.7;text-align:left;flex-shrink:0}
+  .receipt .tot{font-weight:700}
+  #modalActions{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1.1rem}
+  .fridge-grid{display:grid;gap:.7rem;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));max-height:22rem;overflow:auto;margin-top:1.2rem}
+  .sticky{background:var(--cream);border:1px solid #79523633;border-radius:4px 14px 4px 14px;padding:.9rem;box-shadow:var(--shadow);line-height:1.5;font-size:.88rem;overflow-wrap:anywhere}
+  .sticky:nth-child(odd){transform:rotate(-1.2deg)}
+  .sticky:nth-child(even){transform:rotate(1deg)}
+  .sticky:nth-child(3n){background:#f3e2c6}
+  .sticky:nth-child(4n){background:#e9cfae}
+  .sticky b{display:block;font-family:var(--mono);font-size:.68rem;color:var(--sage-deep);margin-top:.6rem}
+  .fridge-form{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1.2rem}
+  .fridge-form input{flex:1;min-width:8rem}
+
+  /* admin */
+  #admin .btn-solid, #modal .btn-solid{color:var(--beige)}
+  .btn.btn-solid{color:var(--beige)}
+  .btn.btn-line{color:var(--terracotta)}
+  #admin{position:fixed;inset:0;background:#3a2415aa;display:none;align-items:flex-start;justify-content:center;padding:1rem;z-index:120;overflow:auto}
+  #admin.open{display:flex}
+  #adminBox{background:var(--paper);border-radius:14px;max-width:44rem;width:100%;max-height:92vh;overflow:auto;border:1px solid var(--border);margin:auto}
+  #adminBox .mbody{padding:1.6rem 1.6rem 2rem}
+  #adminBox h3{font-size:1.5rem;margin:.4rem 0}
+  .afield{margin:.8rem 0}
+  .afield label{display:block;font-family:var(--mono);font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.35rem}
+  .ainput{width:100%;border:1px solid var(--border);border-radius:10px;background:var(--cream);color:var(--terracotta);padding:.65rem .9rem;font:inherit;font-size:.92rem}
+  textarea.ainput{min-height:5rem;resize:vertical;line-height:1.6}
+  textarea.ainput.tall{min-height:12rem;font-size:.85rem}
+  .arow{display:flex;align-items:center;gap:.7rem;background:var(--cream);border:1px solid #79523633;border-radius:10px;padding:.6rem .8rem;margin-bottom:.5rem}
+  .arow .t{flex:1;min-width:0;font-size:.88rem}
+  .arow .t b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .arow .t span{font-family:var(--mono);font-size:.68rem;color:var(--sage-deep);font-weight:700}
+  .abtn{border:1px solid var(--border);background:transparent;border-radius:99px;padding:.35rem .85rem;font-size:.76rem;font-weight:700;cursor:pointer;color:var(--terracotta);font-family:var(--mono);white-space:nowrap}
+  .abtn:hover{background:#d5a45f33}
+  .abtn.danger:hover{background:#b9685833;border-color:var(--rose)}
+  .arowbtns{display:flex;gap:.4rem;flex-shrink:0}
+  .abtnrow{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1rem}
+  .anote{font-size:.82rem;color:var(--muted);line-height:1.6;background:var(--cream);border:1px solid var(--border);border-radius:10px;padding:.8rem 1rem;margin-top:1.2rem}
+
+  /* reveal */
+  .rv{opacity:0;transform:translateY(18px);transition:.6s ease}
+  .rv.in{opacity:1;transform:none}
+  .marquee{overflow:hidden;white-space:nowrap;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--terracotta);color:var(--beige);padding:.6rem 0;font-size:.75rem;letter-spacing:.2em;font-weight:700;font-family:var(--mono)}
+  .marquee span{display:inline-block;padding:0 1.5rem;animation:mq 22s linear infinite}
+  @keyframes mq{to{transform:translateX(-50%)}}
+</style>
+
+<div id="boot"><div class="box"><div class="logo">✦ Hania OS <span style="font-family:var(--mono);font-size:.9rem">v2.0</span></div><div class="bar"><i></i></div><p>loading pixels… arranging chai…</p><p id="bootCity"></p></div></div>
+
+<header class="top" id="topHeader">
+  <div class="shell navwrap">
+    <a class="logo" href="#top" aria-label="Hania Fayyaz home">✦ Hania OS</a>
+    <span id="appName">Desktop</span>
+    <nav class="desk" aria-label="Primary">
+      <ul>
+        <li><a href="#hello">/hello</a></li>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#journal">Journal</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Say salam</a></li>
+      </ul>
+    </nav>
+    <div class="sysicons"><span id="clockEl">--:--</span><span id="hereNow" title="live visitor count switches on once the saved version gets its server piece">you are here</span><span id="moodDot" hidden>☾ late mode</span><span>3G-ready</span><button class="burger" id="burgerBtn" aria-label="Open menu" aria-expanded="false" style="width:2rem;height:2rem"><span></span><span></span></button></div>
+  </div>
+  <div id="mobileNav">
+    <a href="#hello">/hello</a><a href="#work">Work</a><a href="#journal">Journal</a><a href="#about">About</a><a href="#contact">Say salam</a>
+  </div>
+</header>
+
+<main id="top" class="wallpaper">
+  <section class="shell hero section">
+    <div class="win hero-win rv">
+      <div class="win-bar"><span class="lights"><i></i><i></i><i></i></span><span class="win-title">hello.txt · TextEdit</span></div>
+      <div class="win-body hero-copy">
+        <span class="hello-note" id="quickNoteEl">✦ hello, curious mind</span>
+        <p class="eyebrow">a little corner of the internet by hania</p>
+        <h1 class="display-xl" style="margin-top:.8rem">I make ideas <em id="heroWordEl">tangible.</em></h1>
+        <p class="hero-sub" style="margin-top:1.2rem">17, Lahore. Websites, visual identities, words, experiments. <span id="heroSites">6</span> sites live, <span id="heroEssays">4</span> essays published. Design + code, both mine.</p>
+        <div><span class="avail"><span class="dot"></span>2 build slots open · booking now</span></div>
+        <div class="cta-row">
+          <a class="btn btn-solid" href="#work">Stalk my work →</a>
+          <a class="btn btn-line" href="#contact">Say salam →</a>
+        </div>
+        <ol class="hero-meta">
+          <li><span class="n">01</span>build</li>
+          <li><span class="n">02</span>design</li>
+          <li><span class="n">03</span>write</li>
+          <li><span class="n">04</span>ship</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee"><span>OPEN FOR COMMISSIONS · WHATSAPP-ORDERING SITES · LIGHT FOR 3G · BILINGUAL URDU/ENGLISH · DESIGN + CODE · OPEN FOR COMMISSIONS · WHATSAPP-ORDERING SITES · LIGHT FOR 3G · BILINGUAL URDU/ENGLISH · DESIGN + CODE · </span></div>
+
+  <section id="hello" class="section">
+    <div class="shell">
+      <div class="win rv">
+        <div class="win-bar"><span class="lights"><i></i><i></i><i></i></span><span class="win-title">hello/ · say salam</span></div>
+        <div class="win-body">
+          <p class="eyebrow">/hello</p>
+          <h2 class="display-lg" style="margin-top:.6rem">Assalam-o-Alaikum, I am Hania.</h2>
+          <p class="sub">17, Lahore. I design and build calm, warm websites, identities, and essays. Tell me what you are cooking and what you need: a landing page, a store, a brand refresh, or just feedback.</p>
+          <div class="contact-row">
+            <a class="btn btn-solid btn-big" href="mailto:haniafayyaz25@gmail.com?subject=Salam%20Hania">Say salam →</a>
+            <a class="btn btn-line btn-big" href="https://wa.me/923264566466" target="_blank" rel="noopener">WhatsApp ↗</a>
+            <a class="btn btn-line btn-big" href="#work">See the work →</a>
+          </div>
+          <p style="margin-top:1.2rem"><a class="link-quiet" href="mailto:haniafayyaz25@gmail.com">haniafayyaz25@gmail.com</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="work" class="section">
+    <div class="shell">
+      <div class="win rv">
+        <div class="win-bar"><span class="lights"><i></i><i></i><i></i></span><span class="win-title" id="workTitle">work/ · 6 items</span></div>
+        <div class="win-body">
+          <div class="sec-head">
+            <div><p class="eyebrow">finder · sorted by vibes</p><h2 class="display-lg" style="margin-top:.6rem">Things taking shape</h2></div>
+          </div>
+          <div class="filters" id="filtersCtn">
+            <button class="fbtn active" data-f="All">All</button>
+            <button class="fbtn" data-f="Live">● Live</button>
+            <button class="fbtn" data-f="Building">◐ Building</button>
+          </div>
+          <div class="grid-work" id="workGrid"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="section">
+    <div class="shell">
+      <div class="win rv">
+        <div class="win-bar"><span class="lights"><i></i><i></i><i></i></span><span class="win-title">about.png · Preview</span></div>
+        <div class="win-body about-grid">
+          <div class="portrait-wrap">
+            <div class="portrait"><img src="src/portrait-hania.jpg" alt="Hania Fayyaz portrait"></div>
+            <span class="chip c1">WhatsApp Ordering</span>
+            <span class="chip c2">3G-Fast</span>
+            <span class="chip c3">Bilingual</span>
+            <div class="skillpills">
+              <span>Saraiki &amp; Proud</span><span>React</span><span>Next.js</span><span>JavaScript</span><span>Figma</span><span>Brand Design</span>
+            </div>
+          </div>
+          <div>
+            <p class="eyebrow">the person behind the work</p>
+            <p class="quote" style="margin-top:1rem">“Creative ideas, thoughtfully designed and beautifully built.”</p>
+            <div class="about-bio" style="margin-top:1.2rem">
+              <p>Assalam-o-Alaikum, I'm <strong>Hania Fayyaz</strong>, 17, from Lahore. Web developer &amp; graphic designer making calm, warm corners of the internet. No face on camera, all work on screen.</p>
+              <p>Landing pages that explain, storefronts that sell, identities that stick. React / Next.js / JavaScript + Figma brand systems. My sites load on 3G and survive load-shedding.</p>
+            </div>
+            <div style="margin-top:1.4rem;display:flex;gap:1rem;flex-wrap:wrap">
+              <a class="btn btn-solid" href="#contact">Work with me →</a>
+              <a class="link-more" href="#journal"><span class="u">Read the journal</span><span>→</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="studio" class="section">
+    <div class="shell">
+      <div class="win rv">
+        <div class="win-bar"><span class="lights"><i></i><i></i><i></i></span><span class="win-title">hania@studio: Terminal</span></div>
+        <div class="term">hania@studio:~$ whoami<br><span class="g">developer + designer, 17, Lahore. design and code, both mine.</span><br>hania@studio:~$ ls ./ways-of-making<br><span class="p">build/</span> <span class="dim">fast calm websites. landing pages, stores, WhatsApp ordering.</span><br><span class="p">design/</span> <span class="dim">identities, banners, posters. cream + ink + one warm accent.</span><br><span class="p">write/</span> <span class="dim">essays with teeth. <span id="termEssays">4</span> published, more brewing.</span><br><span class="p">ship/</span> <span class="dim">small bets, quick prototypes. <span id="termSites">6</span> sites live.</span><br>hania@studio:~$ <span class="cursor"></span></div>
+      </div>
+      <div class="notifs rv">
+        <p class="eyebrow">live from my phone</p>
+        <div class="notif"><span class="app">▲</span><div><b>Vercel</b><p>Deployment successful. 0 errors, mashallah.</p></div><time>now</time></div>
+        <div class="notif"><span class="app">✦</span><div><b>Figma</b><p>You have 47 layers named "Rectangle". Pls.</p></div><time>3am</time></div>
+        <div class="notif"><span class="app">⌁</span><div><b>GitHub</b><p>Hania pushed to main at 2:47am. Again.</p></div><time>yesterday</time></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="journal" class="section">
+    <div class="shell">
+      <div class="win rv">
+        <div class="win-bar"><span class="lights"><i></i><i></i><i></i></span><span class="win-title" id="journalTitle">journal/ · 4 notes</span></div>
+        <div class="win-body">
+          <div class="sec-head">
+            <div><p class="eyebrow">textedit · plain text, strong opinions</p><h2 class="display-lg" style="margin-top:.6rem">Notes &amp; essays</h2></div>
+          </div>
+          <div class="jrows" id="journalGrid"></div>
+          <div class="paper">
+            <p class="serif" style="font-size:1.8rem;font-style:italic;margin:0">The rest is still being written.</p>
+            <p style="color:var(--muted);max-width:26rem;margin:.7rem auto 0">More brewing. Chai's on.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="fridge" class="section">
+    <div class="shell">
+      <div class="win rv">
+        <div class="win-bar"><span class="lights"><i></i><i></i><i></i></span><span class="win-title" id="fridgeTitle">fridge/ · sticky notes</span></div>
+        <div class="win-body">
+          <p class="eyebrow">the fridge door</p>
+          <h2 class="display-lg" style="margin-top:.6rem">Leave a little note.</h2>
+          <p style="color:var(--muted);max-width:30rem;line-height:1.6">For future clients, friends, and 3am scrollers. Be kind or be funny.</p>
+          <div class="fridge-grid" id="fridgeGrid"></div>
+          <div class="fridge-form">
+            <input class="ainput" id="frName" maxlength="24" placeholder="Your name" autocomplete="off">
+            <input class="ainput" id="frNote" maxlength="120" placeholder="A line for the fridge..." autocomplete="off">
+            <button class="btn btn-solid" id="frStickBtn">Stick it</button>
+          </div>
+          <p class="anote">Notes live in this browser for now. A shared fridge for everyone arrives with the saved version.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="now">
+    <div class="shell">
+      <div class="win rv">
+        <div class="win-bar"><span class="lights"><i></i><i></i><i></i></span><span class="win-title">now.txt · TextEdit</span></div>
+        <div class="win-body now-flex">
+          <p class="eyebrow">currently exploring</p>
+          <div class="skillpills" id="nowPills"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section">
+    <div class="shell">
+      <div class="win rv">
+        <div class="win-bar"><span class="lights"><i></i><i></i><i></i></span><span class="win-title">say-salam.mail · Mail</span></div>
+        <div class="win-body">
+          <p class="eyebrow">to: hania · from: you</p>
+          <h2 class="display-lg" style="margin-top:.6rem">Got something cooking?</h2>
+          <p class="sub">A website, a visual identity, a story, or just a question. My inbox is a friendly place.</p>
+          <div class="contact-row">
+            <a class="btn btn-solid btn-big" href="mailto:haniafayyaz25@gmail.com">Say salam →</a>
+            <a class="btn btn-line btn-big" href="https://wa.me/923264566466" target="_blank" rel="noopener">WhatsApp ↗</a>
+            <a class="btn btn-line btn-big" href="https://www.linkedin.com/in/hania-fayyaz-dev/" target="_blank" rel="noopener">LinkedIn ↗</a>
+          </div>
+          <div class="copies">
+            <button class="fbtn" id="copyEmailBtn">Copy email</button>
+            <button class="fbtn" id="copyWaBtn">Copy WhatsApp link</button>
+          </div>
+          <p style="margin-top:1.4rem"><a class="link-quiet" href="mailto:haniafayyaz25@gmail.com">haniafayyaz25@gmail.com</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="shell fgrid">
+    <div><p class="serif" style="font-size:1.8rem;margin:0">Hania OS v2.0</p>
+      <p style="color:var(--muted);font-size:.9rem;max-width:20rem">A place for things I build, design, write, and ship.</p></div>
+    <div><p class="eyebrow" style="margin-bottom:1rem">Windows</p>
+      <ul><li><a href="#hello">hello/</a></li><li><a href="#work">work/</a></li><li><a href="#journal">journal/</a></li><li><a href="#fridge">fridge/</a></li><li><a href="#about">about.png</a></li><li><a href="#contact">say-salam.mail</a></li></ul></div>
+    <div><p class="eyebrow" style="margin-bottom:1rem">Elsewhere</p>
+      <ul><li><a href="mailto:haniafayyaz25@gmail.com">haniafayyaz25@gmail.com</a></li>
+      <li><a href="https://www.linkedin.com/in/hania-fayyaz-dev/" target="_blank" rel="noopener">LinkedIn ↗</a></li>
+      <li><a href="https://wa.me/923264566466" target="_blank" rel="noopener">WhatsApp ↗</a></li></ul></div>
+  </div>
+  <div class="shell fbottom" style="display:flex;flex-wrap:wrap;gap:.8rem;justify-content:space-between;border-top:1px solid var(--border);padding-top:1.1rem;margin-top:2rem;font-size:.8rem;color:var(--muted)"><span>© 2026 Hania Fayyaz</span><span>made with chai at 3am · I make ideas tangible.</span></div>
+</footer>
+
+<nav class="dock" aria-label="Dock">
+  <a href="#top" data-sec="top" title="Desktop">✦</a>
+  <a href="#work" data-sec="work" title="Work">▦</a>
+  <a href="#journal" data-sec="journal" title="Journal">✎</a>
+  <a href="#about" data-sec="about" title="About">●</a>
+  <a href="#studio" data-sec="studio" title="Terminal">◆</a>
+  <a href="#contact" data-sec="contact" title="Mail">✉</a>
+</nav>
+
+<div id="modal"><div id="modalBox"><div class="win-bar"><span class="lights"><i></i><i></i><i></i></span><span class="win-title" id="modalKicker">Journal</span></div><div class="mbody"><h3 id="modalTitle"></h3><div class="body" id="modalBody"></div><div style="margin-top:1.5rem"><button class="btn btn-solid" onclick="document.getElementById('modal').classList.remove('open')">Close</button></div></div></div></div>
+
+<div id="admin"><div id="adminBox"><div class="win-bar"><span class="lights"><i></i><i></i><i></i></span><span class="win-title" id="adminKicker">admin/ · locked</span></div><div class="mbody">
+  <div id="adminGate">
+    <p class="eyebrow">restricted area</p>
+    <h3 id="gateTitle">Enter passphrase</h3>
+    <p class="anote" id="gateHint" style="margin-top:.8rem">Type your admin passphrase to manage work projects and journal writings.</p>
+    <div class="afield"><label for="adminPwInput">Passphrase</label><input class="ainput" type="password" id="adminPwInput" autocomplete="off"></div>
+    <div class="abtnrow"><button class="btn btn-solid" id="adminUnlockBtn">Unlock</button><button class="btn btn-line" id="adminCloseBtn">Close</button></div>
+  </div>
+  <div id="adminPanel" hidden>
+    <p class="eyebrow">hania os · content manager</p>
+    <h3 style="margin-bottom:1rem">Work + Journal</h3>
+    <div class="filters">
+      <button class="fbtn atab active" data-t="work">Work</button>
+      <button class="fbtn atab" data-t="journal">Journal</button>
+      <button class="fbtn atab" data-t="backup">Backup</button>
+    </div>
+    <div id="atab-work">
+      <div id="adminWorkList"></div>
+      <div class="afield"><label for="awTitle">Title</label><input class="ainput" id="awTitle" placeholder="Meethi Gali"></div>
+      <div class="afield"><label for="awKind">Kind</label><input class="ainput" id="awKind" placeholder="Web"></div>
+      <div class="afield"><label for="awStatus">Status</label><select class="ainput" id="awStatus"><option>Live</option><option>Building</option></select></div>
+      <div class="afield"><label for="awDesc">Description</label><textarea class="ainput" id="awDesc" placeholder="One or two lines about the project."></textarea></div>
+      <div class="afield"><label for="awStack">Stack line</label><input class="ainput" id="awStack" placeholder="Bakery · WhatsApp Ordering · Responsive"></div>
+      <div class="afield"><label for="awStory">Full story (blank line = new paragraph)</label><textarea class="ainput tall" id="awStory" placeholder="The idea, design direction, focus..."></textarea></div>
+      <div class="afield"><label for="awUrl">Case URL</label><input class="ainput" id="awUrl" placeholder="https://..."></div>
+      <div class="afield"><label for="awLive">Live site URL</label><input class="ainput" id="awLive" placeholder="https://..."></div>
+      <div class="afield"><label for="awImg">Image (src/work-x.jpg or full URL)</label><input class="ainput" id="awImg" placeholder="src/work-new.jpg"></div>
+      <div class="abtnrow"><button class="btn btn-solid" id="awSaveBtn">Add project</button><button class="btn btn-line" id="awCancelBtn" hidden>Cancel</button></div>
+    </div>
+    <div id="atab-journal" hidden>
+      <div id="adminPostList"></div>
+      <div class="afield"><label for="ajTitle">Title</label><input class="ainput" id="ajTitle" placeholder="Essay title"></div>
+      <div class="afield"><label for="ajDate">Date</label><input class="ainput" id="ajDate" placeholder="12 Nov 2026"></div>
+      <div class="afield"><label for="ajTag">Tag</label><input class="ainput" id="ajTag" placeholder="Society"></div>
+      <div class="afield"><label for="ajBody">Body (blank line = new paragraph)</label><textarea class="ainput tall" id="ajBody" placeholder="Write here. Leave a blank line between paragraphs."></textarea></div>
+      <div class="abtnrow"><button class="btn btn-solid" id="ajSaveBtn">Add writing</button><button class="btn btn-line" id="ajCancelBtn" hidden>Cancel</button></div>
+    </div>
+    <div id="atab-backup" hidden>
+      <p class="anote">Your edits save in this browser instantly. Nothing leaves this device until you publish. To make changes live for everyone, email the backup to haniafayyaz25@gmail.com (it copies automatically, then opens your mail app for you to paste and send).</p>
+      <div class="afield"><label for="adminExport">Backup JSON</label><textarea class="ainput tall" id="adminExport" readonly></textarea></div>
+      <div class="abtnrow">
+        <button class="btn btn-solid" id="adminCopyBtn">Copy backup</button>
+        <button class="btn btn-line" id="adminEmailBtn">Email backup</button>
+        <button class="btn btn-line" id="adminDownloadBtn">Download file</button>
+        <button class="btn btn-line" id="adminImportBtn">Import from box</button>
+        <button class="btn btn-line" id="adminResetBtn">Reset to defaults</button>
+      </div>
+      <div class="afield"><label for="adminPwNew">Change passphrase</label><input class="ainput" type="password" id="adminPwNew" placeholder="New passphrase" autocomplete="off"></div>
+      <div class="abtnrow"><button class="btn btn-line" id="adminPwBtn">Set new passphrase</button><button class="btn btn-line" id="adminLockBtn">Lock panel</button></div>
+    </div>
+  </div>
+</div></div></div>
+
+<script>
+console.log("%c salam fellow dev, you inspect and I respect. Hania ", "font-weight:bold;color:#795236");
+const $ = s => document.querySelector(s);
+// /hello alias: support #/hello links too
+if(location.hash === "#/hello"){ location.hash = "#hello"; }
+addEventListener("hashchange", ()=>{ if(location.hash === "#/hello"){ location.hash = "#hello"; } });
+// boot
+addEventListener("load", ()=> setTimeout(()=> $("#boot").classList.add("done"), 900));
+setTimeout(()=> $("#boot").classList.add("done"), 3500);
+$("#boot").onclick = ()=> $("#boot").classList.add("done");
+// menu clock, Lahore time
+function tick(){ try{ $("#clockEl").textContent = new Date().toLocaleTimeString("en-PK",{hour:"2-digit",minute:"2-digit",timeZone:"Asia/Karachi"}) + " PKT"; }catch(e){ $("#clockEl").textContent = new Date().toLocaleTimeString().slice(0,5); } }
+tick(); setInterval(tick, 15000);
+// personal boot line: visitor city from timezone, once a day
+try{
+  const today = new Date().toISOString().slice(0,10);
+  const tz = (Intl.DateTimeFormat().resolvedOptions().timeZone || "").split("/").pop().replace(/_/g, " ");
+  const place = tz === "Karachi" ? "Pakistan" : (tz || "your corner");
+  if(localStorage.getItem("haniaOS_boot_day") !== today){
+    localStorage.setItem("haniaOS_boot_day", today);
+    const t = new Date().toLocaleTimeString([], {hour:"numeric", minute:"2-digit"});
+    $("#bootCity").textContent = "routing you in from " + place + " · " + t;
+  }
+}catch(e){}
+// rotating hero lines (plain JS so the page works on Vercel too, no perchance lists needed)
+const HERO_WORDS = ["tangible.", "visible.", "real.", "memorable."];
+const QUICK_NOTES = ["hello, curious mind", "welcome in, make yourself at home", "thanks for stopping by", "built with care in the studio"];
+let heroN = 0, noteN = 0;
+const heroEl = $("#heroWordEl"), noteEl = $("#quickNoteEl");
+setInterval(()=>{ if(!heroEl) return; heroN = (heroN + 1) % HERO_WORDS.length; heroEl.style.opacity = 0; setTimeout(()=>{ heroEl.textContent = HERO_WORDS[heroN]; heroEl.style.opacity = 1; }, 350); }, 5000);
+setInterval(()=>{ if(!noteEl) return; noteN = (noteN + 1) % QUICK_NOTES.length; noteEl.textContent = "✦ " + QUICK_NOTES[noteN]; }, 7000);
+// late-night mood: warmer palette + greeting after 11pm
+try{
+  const h = new Date().getHours();
+  if(h >= 23 || h < 5){
+    document.body.classList.add("late");
+    QUICK_NOTES.unshift("up late? chai is on.");
+    if(noteEl) noteEl.textContent = "✦ " + QUICK_NOTES[0];
+    const md = $("#moodDot"); if(md) md.hidden = false;
+  }
+}catch(e){}
+// presence: live count once the saved version gets its server piece
+function setPresence(txt){ const el = $("#hereNow"); if(el) el.textContent = txt; }
+try{ if(typeof root !== "undefined" && root.createServerSocket){ setPresence("connecting…"); } }catch(e){}
+// burger
+const burger = $("#burgerBtn"), mnav = $("#mobileNav");
+burger.onclick = ()=>{ const o = mnav.classList.toggle("open"); burger.classList.toggle("open", o); burger.setAttribute("aria-expanded", o); };
+mnav.querySelectorAll("a").forEach(a=> a.onclick = ()=>{ mnav.classList.remove("open"); burger.classList.remove("open"); });
+
+// projects, Hania's real published work (full cases baked in, no outside links)
+const PROJECTS = [
+  {title:"Meethi Gali", kind:"Web", status:"Live", desc:"A colorful Pakistani bakery website inspired by the warmth and charm of traditional mithai shops.", stack:"Bakery · WhatsApp Ordering · Responsive", url:"https://meethi-gali.vercel.app/", img:"src/work-meethi-gali.jpg", live:"https://meethi-gali.vercel.app/", story:"<h4>The idea</h4><p>Create a bakery experience that feels warm, local and memorable rather than like a generic storefront.</p><h4>Design direction</h4><p>A soft, playful palette and a traditional bakery-inspired atmosphere help the brand feel inviting while keeping the website easy to browse.</p><h4>Focus</h4><ul><li>Brand-led visual presentation</li><li>Clear product browsing</li><li>Responsive website experience</li></ul>"},
+  {title:"Sweet Crumbs", kind:"Web", status:"Live", desc:"A cute, product-focused bakery storefront for cakes, cupcakes, brownies and dessert boxes.", stack:"Storefront · UI Design · Responsive", url:"https://sweet-crumbs-2twr.vercel.app/", img:"src/work-sweet-crumbs.jpg", live:"https://sweet-crumbs-2twr.vercel.app/", story:"<h4>The idea</h4><p>Build a practical online home for a home bakery that can showcase its menu and help turn browsing into customer enquiries.</p><h4>Design direction</h4><p>A playful, Pinterest-inspired look gives the storefront personality without getting in the way of the products.</p><h4>Focus</h4><ul><li>Product-first presentation</li><li>Mobile-friendly browsing</li><li>Clear customer enquiry path</li></ul>"},
+  {title:"Scoop & Swirl", kind:"Web", status:"Live", desc:"A playful dessert-shop website with a bright, inviting visual style for a brand built around sweet treats.", stack:"Dessert Shop · UI Design · Responsive", url:"https://scoop-and-swirl.netlify.app/", img:"src/work-scoop-swirl.jpg", live:"https://scoop-and-swirl.netlify.app/", story:"<h4>The idea</h4><p>Create a memorable online presence for a dessert brand that feels fun, inviting and easy to explore.</p><h4>Design direction</h4><p>A lively, dessert-inspired visual style gives the site personality while keeping the experience approachable.</p><h4>Focus</h4><ul><li>Brand-led website presentation</li><li>Responsive browsing experience</li><li>Clear, inviting customer journey</li></ul>"},
+  {title:"Roshni Learning Circle", kind:"Web", status:"Live", desc:"A learning-focused website for Roshni Learning Circle, bringing its educational mission and resources together online.", stack:"NGO · Bilingual · Education", url:"https://roshni-learning-circle-7vsc.vercel.app/", img:"src/work-roshni.jpg", live:"https://roshni-learning-circle-7vsc.vercel.app/", story:"<h4>The idea</h4><p>Create a welcoming digital home for Roshni Learning Circle.</p><h4>Focus</h4><ul><li>Clear presentation of the learning initiative</li><li>Accessible, responsive website experience</li><li>A friendly online presence for learners</li></ul>"},
+  {title:"VEIL: Market Intelligence", kind:"Web", status:"Building", desc:"A dark, institutional-style crypto market-intelligence dashboard, in active development.", stack:"Dashboard · Data UI · Dark Theme", url:"https://veil-market-intelligence-veil-mar.vercel.app/", img:"src/work-veil.jpg", live:"https://veil-market-intelligence-veil-mar.vercel.app/", story:"<h4>The idea</h4><p>Create a focused market workspace that feels closer to an intelligence terminal than a typical retail trading page.</p><h4>Design direction</h4><p>Charcoal surfaces, emerald accents and high-contrast data areas establish a restrained, analytical visual language.</p><h4>Current focus</h4><p>The dashboard is deployed as a work in progress while live market data and interactive features continue to be refined.</p>"},
+  {title:"Crypto Watchlist Dashboard", kind:"Web", status:"Building", desc:"A crypto watchlist concept for keeping market instruments and price info in one focused view.", stack:"Dashboard · Data UI · Concept", url:"https://crypto-watchlist-dashboard-seven.vercel.app/", img:"src/work-crypto.jpg", live:"https://crypto-watchlist-dashboard-seven.vercel.app/", story:"<h4>The idea</h4><p>Create a dedicated space for following selected crypto assets without the clutter of a full trading terminal.</p><h4>Product focus</h4><p>A watchlist-first dashboard concept centered on quick scanning and market awareness.</p><h4>Project link</h4><p>Explore the deployed dashboard to see the current implementation.</p>"}
+];
+const DEFAULT_PROJECTS = JSON.parse(JSON.stringify(PROJECTS));
+// edits saved from the hidden admin panel on this device override the built-ins above
+function loadLocalContent(){
+  try{
+    const raw = localStorage.getItem("haniaOS_content_v1");
+    if(!raw) return false;
+    const data = JSON.parse(raw);
+    if(Array.isArray(data.projects) && data.projects.length){
+      PROJECTS.length = 0;
+      data.projects.forEach(p=>{
+        if(!p || !p.title) return;
+        const d = DEFAULT_PROJECTS.find(x=> x.title === p.title) || {};
+        PROJECTS.push(Object.assign({}, d, p));
+      });
+      if(!PROJECTS.length) DEFAULT_PROJECTS.forEach(p=> PROJECTS.push(JSON.parse(JSON.stringify(p))));
+    }
+    if(Array.isArray(data.posts) && data.posts.length){
+      POSTS.length = 0;
+      data.posts.forEach(p=>{
+        if(!p || !p.t) return;
+        const d = DEFAULT_POSTS.find(x=> x.t === p.t) || {};
+        POSTS.push(Object.assign({}, d, p));
+      });
+      if(!POSTS.length) DEFAULT_POSTS.forEach(p=> POSTS.push(JSON.parse(JSON.stringify(p))));
+    }
+    return true;
+  }catch(e){ return false; }
+}
+const grid = $("#workGrid");
+let curFilter = "All";
+function renderWork(){
+  grid.innerHTML = "";
+  PROJECTS.filter(p=> curFilter==="All" || p.status===curFilter).forEach(p=>{
+    const d = document.createElement("div"); d.className = "card rv in";
+    d.innerHTML = `<a class="thumb" href="#" data-w="${PROJECTS.indexOf(p)}" title="Quick view"><img src="${p.img}" alt="${p.title} homepage preview"></a><div class="preview-hint">CLICK ON THE PREVIEW</div><span class="kind">${p.kind}</span><h3><a href="#" data-w="${PROJECTS.indexOf(p)}" class="cardtitle" style="text-decoration:none">${p.title}</a></h3>
+      <div><span class="pill ${p.status.toLowerCase()}">${p.status}</span></div>
+      <p>${p.desc}</p><div class="stack">${p.stack}</div>
+      <div style="margin-top:.7rem;display:flex;gap:1rem;flex-wrap:wrap"><a class="link-more" href="${p.live}" target="_blank" rel="noopener"><span class="u">Live site</span><span>↗</span></a></div>`;
+    grid.appendChild(d);
+  });
+}
+document.querySelectorAll(".fbtn").forEach(b=> b.onclick = ()=>{
+  if(!b.dataset.f) return;
+  document.querySelectorAll(".fbtn").forEach(x=>x.classList.remove("active")); b.classList.add("active");
+  curFilter = b.dataset.f; renderWork();
+});
+
+// copy email / whatsapp
+function flashCopy(btn, txt){ const o = btn.textContent; navigator.clipboard.writeText(txt).then(()=>{ btn.textContent = "Copied ✓"; setTimeout(()=> btn.textContent = o, 1400); }); }
+document.getElementById("copyEmailBtn").onclick = function(){ flashCopy(this, "haniafayyaz25@gmail.com"); };
+document.getElementById("copyWaBtn").onclick = function(){ flashCopy(this, "https://wa.me/923264566466"); };
+
+// work quick view
+function openWork(i){
+  const p = PROJECTS[i];
+  $("#modalKicker").textContent = "work/" + p.title.toLowerCase().replace(/[^a-z0-9]+/g,"-");
+  $("#modalTitle").textContent = p.title;
+  $("#modalBody").innerHTML = '<a href="' + p.live + '" target="_blank" rel="noopener"><img src="' + p.img + '" alt="' + p.title + ' homepage preview" style="width:100%;border-radius:10px;border:1px solid var(--border)"></a><p style="margin-top:.9rem">' + p.desc + '</p><div class="stack">' + p.stack + '</div>' + (p.story ? '<div class="story">' + p.story + '</div>' : '');
+  $("#modal").classList.add("open");
+  modalActions("work", i);
+}
+grid.addEventListener("click", function(e){ const a = e.target.closest("[data-w]"); if(!a) return; e.preventDefault(); openWork(+a.dataset.w); });
+
+// journal, Hania's real essays (full text lives here, no outside links)
+const POSTS = [
+  {d:"10 Oct 2026", k:"Society", t:"We Hate Corruption Until It Benefits Us", b:`<em>we don't always hate what's wrong. sometimes, we just hate not being the ones benefiting from it.</em><br><br>there is something about our society that genuinely makes me sit and think, how can people be so selfish?<br><br>and i'm not talking about corruption on some massive scale, where millions disappear and everyone starts pointing fingers at politicians, officials, and people sitting in positions of power. i'm talking about the corruption we see in our everyday lives. in schools, colleges, hospitals, workplaces, agencies, in getting jobs, in getting better opportunities, even in the way people treat trust.<br><br>the kind that has become so ordinary that people don't even recognize it as corruption anymore.<br><br>someone uses a reference to get something they don't deserve. someone uses their authority to make an exception for themselves. someone gets an opportunity that should have gone to a more deserving person. someone bends the rules because they know the right people.<br><br>and when someone questions it?<br><br>"sab hi karte hain."<br><br>everyone does it.<br><br>and somehow, that becomes the end of the conversation.<br><br>since when did the number of people doing something determine whether it was right or wrong? if enough people lie, does lying become honesty? if enough people cheat, does cheating become fair? if an entire society starts accepting something wrong, does that magically make it right?<br><br>i genuinely want to understand this logic.<br><br>because the problem isn't just that people do these things. the problem is that we have reached a point where people don't even feel guilty about doing them. something that should make a person question their own conscience has become so normal that questioning it makes <em>you</em> look strange.<br><br>we haven't just normalized corruption. we've normalized the excuses that protect it.<br><br>and i think that's far more dangerous.<br><br>because when people stop feeling guilty about doing something wrong, they also stop feeling the need to question themselves. they don't ask whether their actions are fair. they don't think about who might be paying the price for their benefits. they simply look around, see other people doing the same thing, and decide that they have nothing to worry about.<br><br>as if a wrong thing becomes right the moment enough people agree to do it.<br><br><hr><br><br>the worst part is the double standards.<br><br>people criticize corruption when someone else benefits from it. they talk about merit when they are the ones being overlooked. they talk about fairness when they are the ones being treated unfairly. they complain about a system when it doesn't give them what they want.<br><br>but what happens when that same system opens a door for them?<br><br>suddenly, everything changes.<br><br>now it's a reference. now it's a connection. now it's someone helping out. now it's just how things work.<br><br>the very thing they criticized yesterday becomes acceptable today, simply because this time, they're the ones benefiting.<br><br>and i hate that hypocrisy.<br><br>i hate the idea that a person's principles can change depending on which side of the unfairness they happen to be standing on. i hate that we can recognize injustice perfectly well when it hurts us, yet somehow become completely blind to it when it benefits us.<br><br>do we actually believe in fairness, or do we only believe in receiving fair treatment?<br><br>because those are two very different things.<br><br>it's easy to demand justice when we are the ones being denied something. it's easy to talk about honesty when someone else is being dishonest. it's easy to point fingers when we have nothing to lose.<br><br>but what happens when being fair means giving up an advantage? what happens when being honest means losing an opportunity? what happens when doing the right thing means someone else gets what we wanted?<br><br>do our principles still matter then?<br><br>or were they only there because we had nothing to sacrifice?<br><br><hr><br><br>i've seen this mindset in different places. hospitals, colleges, workplaces, and other spaces where having the right reference or knowing someone with authority can change the way you're treated.<br><br>and i'm not saying every reference is corruption. sometimes, people help others find opportunities, and there's nothing wrong with that. telling someone about a job opening or recommending a person who genuinely deserves a chance isn't the same as manipulating a process.<br><br>the problem begins when a connection becomes more important than merit, when authority becomes a shortcut around fairness, and when someone's privilege comes at the expense of another person's deserving opportunity.<br><br>because there are people who work hard, wait patiently, follow the rules, and trust that their effort will eventually mean something.<br><br>and then there are people who get ahead because they know someone.<br><br>what are we telling the first person?<br><br>that their hard work wasn't enough? that following the rules was a mistake? that their effort matters less than someone else's connections?<br><br>imagine working for something honestly, only to watch someone else receive it without meeting the same standards.<br><br>imagine knowing that you might have had a fair chance if someone hadn't used their influence to get ahead.<br><br>and then imagine being told that this is simply how the world works.<br><br>how convenient.<br><br>the person who benefits gets to call it a smart move. the person who loses gets told to be realistic.<br><br>the person who uses a connection is praised for knowing how to navigate the system. the person who refuses to compromise is told they won't survive in the real world.<br><br>and somehow, the unfairness itself disappears from the conversation.<br><br><hr><br><br>i've seen something else, too.<br><br>i've seen a person leave their job in a system where they refused to accept the corruption around them. and in the years that followed, instead of respecting that decision, people kept pointing them out and mocking them.<br><br>think about that for a second.<br><br>a person leaves because they don't want to participate in something they believe is wrong. and what does society do? instead of asking why someone felt they had to leave, people make that person the joke.<br><br>why?<br><br>why is it so difficult for us to respect someone who refuses to compromise their honesty?<br><br>why do we find it easier to laugh at the person who walks away than question the environment that made walking away necessary?<br><br>and what does that say about us?<br><br>i sit and think about those people. how can someone be so selfish that they can ignore another person's honesty, focus only on the illegal benefits they themselves might receive, hurt others in the process, and still find nothing wrong with their own behaviour?<br><br>how does that happen?<br><br>how does someone watch another person refuse to participate in corruption and see something worth mocking instead of something worth respecting?<br><br>maybe it's because that person's honesty makes everyone else uncomfortable.<br><br>maybe when someone refuses to participate, it forces the people around them to confront the choices they have made. their refusal becomes a reminder that another choice was possible. that not everyone accepted the excuse. that not everyone agreed to play along.<br><br>and instead of questioning themselves, people question the person who refused.<br><br>it's easier to make one honest person look foolish than to admit that the system you benefit from might be unfair.<br><br>it's easier to laugh at someone who walked away than to ask yourself why you stayed.<br><br>and perhaps that's one reason dishonesty becomes so deeply rooted: not only because people benefit from it, but because they create an environment in which refusing it becomes socially costly.<br><br>the honest person loses opportunities, faces criticism, or becomes a joke.<br><br>the person who benefits carries on.<br><br>and then people wonder why so few are willing to stand against it.<br><br><hr><br><br>there is something deeply troubling about the way society can make a person feel guilty for being honest.<br><br>you refuse to take an unfair advantage, and people ask why you're being so difficult.<br><br>you refuse to participate, and someone tells you that you won't survive like this.<br><br>you choose to walk away, and years later, people still bring it up as if your honesty was some ridiculous mistake.<br><br>imagine being made to feel guilty for doing what you believe is right.<br><br>imagine having to defend your own honesty while the people benefiting from dishonesty carry on without a second thought.<br><br>at some point, a person might start questioning themselves. not because they believe they did something wrong, but because everyone around them keeps treating their decision as if it was foolish.<br><br>and that is what makes this so disturbing.<br><br>when a society repeatedly rewards people for taking unfair advantages and mocks those who refuse, it sends a message about what it values.<br><br>it tells people that results matter more than the way those results were achieved. that getting ahead matters more than being fair. that an opportunity is worth taking regardless of who loses it.<br><br>and eventually, people start believing that honesty is a luxury they cannot afford.<br><br>i understand that life isn't always fair. i understand that people have families to support, responsibilities to fulfil, and opportunities they cannot afford to lose. i understand why someone might feel tempted to do what everyone else is doing when they believe that refusing will leave them behind.<br><br>but understanding the pressure doesn't mean we should stop questioning the behaviour.<br><br>because if we keep excusing every unfair decision by saying that the system made us do it, then who is ever responsible for changing anything?<br><br>if everyone is waiting for someone else to become honest first, who takes the first step?<br><br>and if we keep punishing the people who try, why should we be surprised when fewer people are willing to try at all?<br><br><hr><br><br>i also believe that systems can exploit human greed.<br><br>people want better opportunities. they want security, comfort, money, recognition, and advantages for themselves and their families. there's nothing inherently wrong with wanting a better life.<br><br>the problem begins when the desire to get ahead becomes more important than the rights and opportunities of other people.<br><br>a system that distributes benefits unfairly can give people reasons to remain silent. when someone receives an advantage from an unfair arrangement, they may become less willing to question it. when speaking against a practice could mean losing privileges, people may convince themselves that staying quiet is the sensible thing to do.<br><br>and when enough people benefit from the same arrangement, those benefits can become a way of protecting it.<br><br>some people create unfair systems. some people profit from them. some people defend them because they don't want to lose what they have. others remain silent because speaking up feels too costly.<br><br>their positions may be different, but their choices can help keep the same unfair practices alive.<br><br>and that's why i don't think responsibility belongs only to the person who created the system.<br><br>if someone knowingly participates in corruption, benefits from it at another person's expense, and then defends it because they don't want to lose their advantage, they cannot pretend they have no part in keeping it alive.<br><br>you cannot keep taking advantage of an unfair system and then act as if the unfairness it produces has nothing to do with you.<br><br>you cannot condemn corruption in public, benefit from it in private, and expect your principles to be taken seriously.<br><br>and you cannot keep telling honest people that they're foolish for refusing to participate, then complain about the lack of integrity in society.<br><br>we often talk about changing systems as if the people within them have no responsibility of their own.<br><br>but systems don't make every decision on behalf of every individual. people still make choices. people still decide whether to exploit an advantage, whether to remain silent, whether to question something that benefits them, and whether to treat another person's loss as an acceptable price for their own gain.<br><br>the system matters. the people who control it matter. but so do the people who willingly keep its unfair practices going.<br><br><hr><br><br>and this brings me to education.<br><br>i believe that a person who is truly educated, who understands the world beyond their own benefits, who recognizes injustice even when it doesn't affect them personally, should know better than to justify it.<br><br>and by educated, i don't mean someone who simply has a degree hanging on their wall or can write impressive words about morality.<br><br>i mean someone who understands the consequences of their actions. someone who can look beyond their own interests. someone who recognizes that another person's loss doesn't become insignificant just because they are the one gaining something.<br><br>because what is the point of education if we can understand the consequences of something and still choose to ignore them when they inconvenience us?<br><br>what is the point of knowing how the world works if we use that knowledge only to find better ways to benefit from it, rather than to recognize when something is wrong?<br><br>a degree can teach you how to build a career. knowledge can help you understand systems, opportunities, and the world around you.<br><br>but what makes you question your own actions when you are the one benefiting from someone else's loss?<br><br>if we understand that something is wrong, but only oppose it when it goes against our own interests, is our problem really a lack of awareness - or a lack of integrity?<br><br>to me, understanding should make us more accountable, not give us better excuses. the more we understand the consequences of our choices, the harder it should become to pretend those consequences don't exist.<br><br>of course, education doesn't automatically make anyone honest. a person can know exactly how unfair a practice is and still choose to participate in it. a person can understand the damage and still convince themselves that their own situation is an exception.<br><br>but that's precisely what bothers me.<br><br>because when you know better and still choose to justify something wrong simply because it benefits you, ignorance is no longer a sufficient explanation.<br><br>you might understand the unfairness perfectly well. you might recognize the harm it causes. you might even criticize it when someone else does it.<br><br>but if you make an exception for yourself, what exactly have you learned?<br><br>knowing what is right and choosing what is right are two different things.<br><br>and perhaps that is where the real test of education begins: not in what we know, but in what we are willing to do with that knowledge when doing the right thing becomes inconvenient.<br><br><hr><br><br>i know people will say that this is how the world works.<br><br>that connections matter. that everyone has to look after their own family. that you cannot survive by being too honest. that if you don't take an opportunity, someone else will.<br><br>and i understand that the world is not always fair. i understand that not every situation is simple, and that there can be a difference between accepting help and deliberately taking an unfair advantage.<br><br>but i keep coming back to the same questions.<br><br>if everyone is busy justifying their own dishonesty, who is left to care about the people paying the price for it?<br><br>if we only care about fairness when we are the ones being treated unfairly, can we honestly say that we believe in fairness?<br><br>if a practice is wrong when someone else benefits from it, what makes it right when we do it ourselves?<br><br>if everyone does something, does that make it acceptable - or does it simply mean that more people have stopped questioning it?<br><br>and if we are educated enough to understand all of this, why do we sometimes use our understanding to justify our behaviour instead of changing it?<br><br>i don't claim to have answers to every question i've raised. i'm not writing this because i believe i'm above every other person or because i think changing a system is easy.<br><br>i'm writing this because i cannot understand how we have become so comfortable with hypocrisy.<br><br>how can someone watch another person suffer because of an unfair practice and still defend that practice simply because it benefits them?<br><br>how can we keep calling ourselves honest while making exceptions for our own dishonesty?<br><br>how can we mock a person for refusing to compromise their principles, then complain about the lack of integrity in society?<br><br>and why do we keep treating "sab hi karte hain" as if it settles the question?<br><br>maybe the most uncomfortable part is that corruption doesn't always ask us to become terrible people overnight.<br><br>sometimes, it asks us to make one exception. to accept one unfair advantage. to look away once because this time, we benefit. to tell ourselves that our situation is different, that we have our reasons, that we cannot afford to be the only ones playing by the rules.<br><br>and then another exception becomes easier.<br><br>and another.<br><br>until eventually, something we once knew was wrong becomes something we defend.<br><br>that's why i think the real question is not simply whether we hate corruption.<br><br>most people will say they do.<br><br>the real question is whether we still hate it when it benefits us.<br><br>whether we would refuse an unfair advantage if accepting it meant taking something away from someone more deserving. whether we would defend an honest person when everyone else is mocking them. whether we would question a practice that gives us privileges, even when questioning it might cost us those privileges.<br><br>because principles are easy to claim when they cost us nothing.<br><br>the test begins when doing the right thing asks us to give something up.<br><br>and maybe, before we ask why corruption exists everywhere, we should ask ourselves something far more uncomfortable:<br><br><b>if the same unfair system offered us exactly what we wanted, would we still have the courage to call it wrong?</b><br><br>or would we, too, look around, see everyone else doing it, and quietly tell ourselves:<br><br><em>sab hi karte hain.</em>`},
+  {d:"9 Oct 2026", k:"Identity", t:"I Know My Auqaat. Do You Know My Point?", b:`there's something that genuinely pisses me off about how people react when you question the people in power in this country.<br><br>somehow, the moment you question them, you become anti-state. anti-national. someone who hates the army, someone who's forgotten their sacrifices, someone who apparently has no idea what this country means.<br><br>and honestly?? i'm tired of this.<br><br>recently, i was debating someone who was part of the very system i was questioning. and they said something along the lines of:<br><br><em>"yeah jo log Army k khilaf baat kr rhy hain or army ko burra bol rhy hain, yeahi log, jab India k sath jung hoti hae tuh Army ki tarifien kr rhy hoty hain or Army hi enki madad krti hae,... soo lihaza ap log apni auqatt naa bholien..."</em><br><br>and that last line.<br><br><b>"ap log apni auqatt naa bholien."</b><br><br>i swear, THAT was the part that got me.<br><br>because what exactly was i supposed to do with that?? forget the actual conversation? stop asking questions? suddenly agree with everything because someone decided to remind me of my place?<br><br>since when did telling someone to remember their <em>auqaat</em> become an answer to anything?<br><br>and look, i'm not going to sit here and pretend that hypocrisy doesn't exist. ofc it does. there are people who criticise the army one day and praise it the next. there are people who change their opinions according to whatever suits them. i'm not denying that.<br><br>but THAT WASN'T MY POINT.<br><br>my point was the people of azad kashmir. the protests. the people who were reportedly killed, the people who were detained, the people who were asking for answers.<br><br>my question was simple. how can a system that's supposed to protect its own people become something those very people are afraid to question??<br><br>and why, whenever people ask for accountability, does the conversation suddenly become about their loyalty to pakistan?<br><br>people were asking questions. people wanted answers. and instead of actually answering them, some were being labelled anti-national.<br><br>women. children. elderly people. ordinary people.<br><br>and somehow, calling people anti-national becomes easier than listening to what they're saying.<br><br>i don't understand that. i genuinely don't.<br><br>because when did asking questions become proof that you hate your country? when did disagreeing with people in power become the same thing as hating everyone associated with the institution they belong to?<br><br>and then came the whole argument about the soldiers who sacrifice their lives for this country.<br><br>the person basically asked me that if i felt so bad for the kashmiris, if i was so angry about what was happening to them, then why wasn't i thinking about the army personnel who sacrifice themselves for pakistan?<br><br>and i remember what i said.<br><br><em>"how'd you say that?? i don't think about them? i do, more than anyone knows. i cried for them, i give them tribute. aur shaheed tuh hamesha zinda rehta hainaa??"</em><br><br>and i meant it. every single word.<br><br>because i genuinely don't understand how someone can look at me questioning those in power and decide that i must not care about our soldiers.<br><br>HOW??<br><br>do you think i just forget them? do you think a person dies and that's it, they're just gone from my memory??<br><br>no.<br><br>i don't forget them. i don't forget their sacrifices. i don't forget that they had lives, families, people waiting for them to come home. i don't forget what they gave up.<br><br>when i say <em>shaheed tuh hamesha zinda rehta hainaa</em>, i mean it. a person doesn't become meaningless to me just because they're no longer physically here. their sacrifice doesn't disappear. their memory doesn't disappear.<br><br>and i could NEVER just forget that.<br><br>so please, don't tell me i don't think about them. don't assume that because i'm angry at certain people in power, i somehow have no respect for the people who serve this country.<br><br><b>i can cry for a shaheed and still question someone who's misusing their authority. both things can exist in me at the same time.</b><br><br>why is that so difficult for people to understand??<br><br>i don't hate the army.<br><br>and i need people to actually understand what i'm saying instead of deciding what i mean for me.<br><br>i don't look at every person in uniform and see an enemy. i don't believe every single person within the system is the same. i know there's a difference between a soldier serving on the ground, someone carrying out their duties, someone giving orders, and someone sitting in a position of power making decisions that affect millions of people.<br><br>they're not all the same person. they don't all have the same responsibilities. and i refuse to treat them as if they do.<br><br>but at the same time, being part of an institution doesn't mean someone should be above criticism.<br><br>i can respect the person and question the institution. i can respect the uniform without blindly agreeing with everyone who wears it. i can honour the sacrifices of our soldiers without giving every senior person in power a free pass to do whatever they want.<br><br><b>respect doesn't mean blind obedience.</b><br><br>and patriotism doesn't mean i have to close my eyes every time something goes wrong.<br><br>i'm a pakistani. THIS IS MY COUNTRY TOO.<br><br>the people who are suffering are my people too. the families losing their loved ones are my people too. the soldiers who leave their homes and never return are my people too.<br><br>so why am i supposed to choose??<br><br>why should caring about one mean i have to stop caring about another?<br><br>i don't agree with everything the government does. sometimes i get angry. sometimes the way authority is exercised in this country genuinely makes me furious. and yes, sometimes i hate what people in power do with the positions they've been given.<br><br>but there's a difference between hating an institution's every individual and hating the people who misuse their authority.<br><br><b>i don't hate the people who serve this country. i hate the people who think serving, ruling, or holding a powerful position gives them the right to treat this country like it belongs to them.</b><br><br>i hate the hypocrisy.<br><br>i hate when people use their positions for their own interests instead of the public's.<br><br>i hate when democracy starts looking like an inconvenience to those who want to hold on to power.<br><br>i hate when people who are supposed to answer questions start acting as if the questions themselves are the problem.<br><br>and i HATE how quickly a conversation about accountability becomes a conversation about loyalty.<br><br>because seriously, why does it always have to be like this?<br><br>when something goes right, there's praise. when someone sacrifices their life, we remember them, we honour them, and we should. absolutely.<br><br>but when something goes wrong? when people start asking questions? when the questions become uncomfortable?<br><br>suddenly, we're talking about how much we owe the institution. suddenly, we're being reminded of sacrifices. suddenly, the person asking questions is the one who needs to explain themselves.<br><br>but what about the people asking for answers??<br><br>what about the families who have lost someone? what about the people who feel unheard? what about the citizens who are expected to trust a system that doesn't seem willing to answer their questions?<br><br>do their lives not matter too??<br><br>do they suddenly lose their right to speak because the people they're questioning have more power than they do?<br><br>and this is what i can't accept.<br><br>you cannot use one person's sacrifice to dismiss another person's suffering. you cannot tell me that because a soldier sacrificed his life for pakistan, i should stop asking questions about the people of pakistan.<br><br>that's not how this works. at least, not for me.<br><br>honouring our soldiers should NEVER mean abandoning our own people.<br><br>and i think one of the most dangerous things we've normalised is this idea that if you question authority, you must hate your country.<br><br>because then people stop asking whether something is right or wrong. they start worrying about whether someone will call them a traitor.<br><br>they become more concerned with proving their loyalty than with actually talking about the problem.<br><br>and slowly, silence becomes easier than honesty.<br><br>but a country doesn't become stronger because its people are afraid to speak. an institution doesn't become more respectable because nobody is allowed to question it. and a person doesn't become less patriotic just because they expect the people in power to be accountable for their actions.<br><br>i don't want a pakistan where the only acceptable citizen is someone who agrees with everything, applauds everything, and never asks WHY.<br><br>i want a country where people can respect the army and still talk about its mistakes. where people can honour soldiers and still demand accountability from those in power. where caring about civilians doesn't automatically make you anti-army.<br><br>i want a country where power actually comes with responsibility.<br><br>and no, i'm not saying every person in the army is responsible for every wrong committed by someone senior to them. that wouldn't be fair either.<br><br>but i'm also not going to pretend that someone's position makes them untouchable.<br><br>if you have power over people, you have responsibilities towards them. and if your decisions affect their lives, then asking you questions shouldn't be treated like a crime.<br><br>THAT is my point.<br><br>not that every soldier is bad. not that the army has never made sacrifices. not that i don't care about the people who have died serving this country.<br><br>my point is that none of those things should be used to shut down every conversation about accountability.<br><br><b>i don't hate the army. i hate the misuse of power. i hate hypocrisy. i hate the idea that people can use their authority to avoid the very accountability they expect from everyone else.</b><br><br>and if someone still can't understand the difference, then maybe the problem isn't that i've forgotten my <em>auqaat</em>.<br><br>maybe they've mistaken criticism for hatred.<br><br>because i can respect our soldiers. i can cry for those who never returned home. i can remember their sacrifices and feel genuine pain for the families they've left behind.<br><br>AND I CAN STILL ASK QUESTIONS.<br><br>i can still demand answers. i can still be angry when i believe people are being wronged. i can still refuse to defend someone simply because they hold a powerful position.<br><br>none of that makes my grief less real. none of that makes my respect less sincere. and none of that makes me less pakistani.<br><br>i refuse to let someone else decide what my patriotism should look like just because my version of it doesn't involve staying silent.<br><br>because to me, loving your country doesn't mean believing that everything done in its name is right.<br><br>sometimes, loving your country means being angry about what is happening to it.<br><br>sometimes, it means asking questions that people don't want to answer.<br><br>sometimes, it means refusing to look away when people are hurting, even when looking away would be so much easier.<br><br>and sometimes, it means being able to hold two things in your heart at once: grief for a soldier who gave his life for this country, and anger over the suffering of a civilian who deserved to be heard.<br><br>i don't have to choose between them.<br><br>i won't choose between them.<br><br>so no, i haven't forgotten the sacrifices of our soldiers. i haven't forgotten what <em>shaheed</em> means to me. i haven't forgotten what this country means to me.<br><br>and i haven't forgotten that the people of this country matter too.<br><br><b>my respect isn't blind. my grief isn't selective. and my patriotism isn't measured by how quietly i accept injustice.</b><br><br>you told people not to forget their <em>auqaat</em>.<br><br>but honestly, i think there's another question worth asking.<br><br>when someone is given power over other people, do they remember their responsibility?<br><br>because power might give you a position. a title. influence. the ability to make decisions that affect thousands, maybe millions, of lives.<br><br>but it doesn't make you the owner of this country.<br><br>and it doesn't make the people questioning you any less worthy of an answer.<br><br>i know what i'm questioning. i know what i respect. and i know what i refuse to defend.<br><br>*<em>i don't hate the army. i refuse to confuse the people who serve this country with the people who misuse its power. and i refuse to let the word </em>patriotism<em> become an excuse for avoiding accountability.</em>*`},
+  {d:"9 Oct 2026", k:"Politics", t:"When Saying No Becomes a Crime", b:`I want to start with something that sounds small. A road. A road is supposed to take you somewhere, to a hospital, a school, a shop, home. But in Pakistan right now, roads are being used to stop people instead of carry them.<br><br>In September, authorities in Islamabad began blocking the main routes into the capital with double-stacked shipping containers. The toll plaza on the Islamabad-Peshawar highway was completely cut off. Thousands of security personnel were deployed, and the government extended the deployment of Rangers in Islamabad and parts of Punjab. Section 144 was in force, which bans gatherings. Dozens of lawmakers, regional leaders and party workers were rounded up across Punjab and Islamabad. Three of Imran Khan's sisters were detained under a public order law. And all of this happened before a single marcher had reached the capital.<br><br>The reason for the march is simple to say. Imran Khan, the former prime minister, has been in jail since 2023. He is 73 now. He says he is a political prisoner, and his party says the cases against him are politically motivated. On August 5, PTI held protests across the country to mark three years of his imprisonment. In Karachi, protesters near the press club faced tear gas while police sealed the roads around them with containers. The party announced its long march to Islamabad for September 27, then postponed it to October 4. Even the party was not fully united, and some of its own leaders said they were not consulted on the first date. I want to be honest about that. PTI is not a perfect movement, and its leaders do not always agree on what the march is even for. One says the goal is Khan's release. The chief minister of Khyber Pakhtunkhwa says it is about restoring the meetings that Khan was allowed to have.<br><br>But the march did begin on October 4, after talks with the government broke down. The government said the march would not be allowed to enter Islamabad. On October 6, the prime minister asked PTI to end it and sit down for dialogue, saying the protests were hurting exports, imports and manufacturing. PTI says the talks failed because the Centre insisted on operations in Khyber Pakhtunkhwa. Right now the convoy is moving slowly through Khyber Pakhtunkhwa, and the party's own secretary general says reaching Islamabad is a distant prospect. So the capital is behind containers, and the marchers are still on the road, and everyone is waiting.<br><br>Here is the part nobody puts on a news banner. The people paying for this standoff are not the politicians. Cargo is piling up at Karachi's port because truckers are scared to drive north. They are afraid their trucks and containers will be seized and used as barricades. One driver told reporters that going toward Punjab now feels like committing suicide. Over 2,000 vehicles have been seized. For the owner of a seized container, the demurrage charges can reach Rs. 30,000 to 40,000 every single day, on top of the deliveries he misses. A truck driver has no party. He just wants to deliver his goods and go home. The government is right that these protests cost the economy. But it never answers the next question, which is how much it costs to seal off a capital city, and who decided that cost was worth paying.<br><br>Now look at Kashmir, where the price has been much higher.<br><br>The movement in Azad Kashmir did not appear overnight. It started in 2023 with small protests over the price of wheat. In May 2024, a six-day wave of strikes and sit-ins swept the region, and people called for a long march to Muzaffarabad. In 2025 the unrest came back, and a region-wide strike ended in around ten deaths and over a hundred injuries, with internet and mobile shutdowns to stop people from organising. Through all of it, the group leading the movement was the Jammu Kashmir Joint Awami Action Committee. It is not a fringe group. It is a coalition of traders, transporters, lawyers, students and ordinary civil society, and it began with the cost of living.<br><br>This year it came to a head. On June 5, the local government banned the committee under the Anti-Terrorism Act. Two days later, on June 7, the protests began, and clashes between protesters and security forces grew in Rawalakot. The committee had a list of 38 demands, including an end to the 12 assembly seats reserved for Kashmiri refugees who live elsewhere in Pakistan. People were also angry about electricity tariffs, wheat prices, and what they say is corruption among local officials. These are the things that decide whether a family eats properly this month.<br><br>The worst day came on July 27, when the first phase of the region's elections was taking place. The committee says security forces opened fire on unarmed demonstrators marching toward Muzaffarabad, killing around twenty that day and wounding more than four hundred. It later said at least 31 of its supporters had been killed. Funerals followed in Rawalakot. Police give a very different account. They say the marchers ignored warnings, tried to enter Rawalakot, and opened fire on security personnel. Officials say two security personnel were killed and that the group carried out violent attacks. Democracy Now later reported at least 40 dead, with security forces accused of firing on nonviolent protesters, and other outlets have reported even higher numbers. Rights groups have accused the state of suppressing peaceful protest, and the government rejects this, saying it was restoring order.<br><br>I do not know the true number of the dead, and neither does anyone outside. That is the point I want to stay on. When people die and no independent body can say how many, something is broken in the system that is supposed to protect them. The elections went ahead anyway. Authorities claimed a turnout of over 50 percent, even though the banned committee had called for a boycott. A vote held while the main voice of the people is banned and its supporters are being buried is not a vote that tells you much.<br><br>I keep coming back to one thought. Ban the group, block the road, detain the sister, shut down the internet, and what you get is not peace. You get silence, and silence is not the same thing. In 2023, the Kashmir protests were about the price of wheat. Three years later, people are dying over it. Nobody stopped to ask what a bag of flour was really saying. It was saying that people felt unheard, and every year the answer from the state has been to make the walls higher instead of listening.<br><br>Pakistan's leaders keep saying they want dialogue. I want to believe them. But dialogue cannot mean listening only when the roads are already blocked and the people are already angry. A country that is truly strong does not need containers to feel safe. It can hear a crowd. It can let people disagree. It can let them walk down a road without wondering whether the road will be closed before they reach the place they were trying to go.<br><br>I am a student from Lahore. I am not a politician. I do not belong to a party office, and I am not writing this because I have all the answers.<br><br>I am writing because I live here.<br><br>And I keep looking at these roads and wondering what we are becoming when the answer to a crowd is a container, the answer to a protest is a detention, and the answer to being unheard is another wall.<br><br>A road is supposed to take you somewhere.<br><br>It should not become a wall.`},
+  {d:"8 Oct 2026", k:"Society", t:"When Safety Becomes a Myth", b:`There is a particular kind of horror in violence that happens in places we are supposed to feel safe. A hospital. A college. A bus stop. A home.<br><br>These are not battlefields. Yet for women in Pakistan, they have become sites of terror.<br><br>In June 2026, Pakistan witnessed a wave of gender-based violence so relentless that it felt less like isolated incidents and more like a mirror held up to an entire society. As a 17-year-old Pre-Medical student from Lahore, a young woman who walks these same streets and waits at these same bus stops, I cannot look away from what that mirror is showing us.<br><br><b>A Week That Should Not Have Happened</b><br><br>On June 5, Dr. Mahnoor Nasir was on duty at Civil Hospital Quetta when a man who had been harassing her for months walked into her ward and threw acid on her face. She was airlifted to Karachi for specialised care. Doctors confirmed that while both eyes were affected, her eyesight was preserved.<br><br>That detail should not feel like good news.<br><br>But it does.<br><br>Because this is what we have been reduced to: relief that she can still see.<br><br>Days later, nursing student Umaima Farooq was waiting for transport at a bus stop in Dera Ghazi Khan when a man arrived and tried to force her into his car.<br><br>She said no.<br><br>He shot her dead, injured a bystander who tried to help her, then killed himself.<br><br>Umaima was pursuing an education. She said no and was murdered for it.<br><br>Then came Eshal Fatima. Seventeen years old. From Jhang.<br><br>She is gone too.<br><br>And then, in Bahawalnagar, police rescued a woman named Hasna who had been locked in a tiny room by her own family, chained in iron, for twelve years.<br><br>Twelve years.<br><br>Her crime?<br><br>She had chosen to marry a man from another caste.<br><br>These are not anomalies.<br><br>They are a pattern.<br><br><b>The Numbers Behind the Names</b><br><br>In 2024, over 2,000 cases of domestic violence, 500 honour killings, and 5,000 rapes were reported across Pakistan. The conviction rate was below 2 percent.<br><br>Below 2 percent.<br><br>That means for every 100 women who report violence, fewer than 2 of their attackers face any legal consequence.<br><br>The rest walk free.<br><br>Some go on to throw acid. Some go to bus stops with guns. Some chain their daughters in rooms for a decade.<br><br>The problem is not a lack of laws.<br><br>Pakistan has legislation against acid attacks, domestic violence, and honour killings. The problem is a culture that does not believe women's safety is worth protecting and a system that proves it through its own inaction.<br><br><b>This Is a Public Health Crisis</b><br><br>As a Pre-Medical student, I have learned that a disease affecting millions of people, producing lifelong trauma, and going largely untreated is, by definition, a public health emergency.<br><br>Violence against women fits every criterion.<br><br>The injuries are only the beginning.<br><br>Survivors face PTSD, depression, and chronic pain for decades. When women cannot safely walk to a hospital, they do not get medical care. When girls are afraid to take public transport, they drop out of school.<br><br>This is not just a crime problem.<br><br>It is a society destroying itself.<br><br><b>What Must Change</b><br><br>The justice system must actually convict.<br><br>A 2 percent conviction rate is not justice. It is an open invitation for more violence.<br><br>Institutions must be made safe, because Dr. Mahnoor was attacked inside a hospital and Umaima was killed at a bus stop.<br><br>And we must start educating boys that a woman's refusal is final, that she is not property, that her life does not belong to him.<br><br><b>Why I Write This</b><br><br>I am not a legal expert or a policymaker.<br><br>I am a teenager with a biology textbook and an anger that will not quiet down.<br><br>Dr. Mahnoor went to work to save lives.<br><br>Umaima stood at a bus stop to get an education.<br><br>Eshal Fatima was seventeen.<br><br>Hasna wanted to choose her own husband.<br><br>They deserved safety.<br><br>They deserved justice.<br><br>They deserved to be believed.<br><br>Pakistan cannot call itself a civilised society while its women are burned, shot, and chained for the crime of existing on their own terms.<br><br>And we cannot stay quiet and call that peace.`}
+];
+const DEFAULT_POSTS = JSON.parse(JSON.stringify(POSTS));
+loadLocalContent();
+function cleanEssay(html){ return String(html).replace(/<br>\s*<br>\s*<a[^>]*>Read full essay on my portfolio[^<]*<\/a>/g, "").replace(/<a[^>]*haniafayyazportfolio\.vercel\.app\/journal[^>]*>.*?<\/a>/g, ""); }
+POSTS.forEach(p=>{ if(p.b) p.b = cleanEssay(p.b); });
+PROJECTS.forEach(p=>{ if(p.url && p.url.includes("haniafayyazportfolio")) p.url = p.live || ""; });
+function renderJournal(){
+  const jg = $("#journalGrid");
+  jg.innerHTML = "";
+  POSTS.forEach((p,idx)=>{
+    const d = document.createElement("button"); d.className = "jrow rv in";
+    d.innerHTML = `<span class="file">≡</span><span class="t"><b>${p.t}</b><span>${p.d} · ${p.k}</span></span><span class="go">→</span>`;
+    d.onclick = ()=>{ $("#modalKicker").textContent = p.d + " · " + p.k; $("#modalTitle").textContent = p.t; $("#modalBody").innerHTML = cleanEssay(p.b); $("#modal").classList.add("open"); modalActions("journal", idx); };
+    jg.appendChild(d);
+  });
+}
+function updateCounts(){
+  $("#workTitle").textContent = "work/ · " + PROJECTS.length + " items";
+  $("#journalTitle").textContent = "journal/ · " + POSTS.length + " notes";
+  $("#heroSites").textContent = PROJECTS.length;
+  $("#heroEssays").textContent = POSTS.length;
+  $("#termSites").textContent = PROJECTS.length;
+  $("#termEssays").textContent = POSTS.length;
+}
+renderWork();
+renderJournal();
+updateCounts();
+$("#modal").addEventListener("click", e=>{ if(e.target.id==="modal") e.target.classList.remove("open"); });
+
+// exploring pills
+["TanStack Start","Brand systems","Fraunces + DM Sans","Figma to code","Learning in public","Motion on the web"].forEach(t=>{
+  const s = document.createElement("span"); s.textContent = t; $("#nowPills").appendChild(s);
+});
+
+// scroll spy, dock plus menubar app name
+const APPS = {top:"Desktop", hello:"TextEdit: hello/", work:"Finder: work/", journal:"TextEdit: journal/", fridge:"Fridge: sticky notes", about:"Preview: about.png", studio:"Terminal", now:"TextEdit: now.txt", contact:"Mail: say-salam"};
+const spy = new IntersectionObserver(es=> es.forEach(e=>{
+  if(!e.isIntersecting) return;
+  const id = e.target.id;
+  document.querySelectorAll(".dock a").forEach(a=> a.classList.toggle("active", a.dataset.sec===id));
+  if(APPS[id]) $("#appName").textContent = APPS[id];
+}), {rootMargin:"-40% 0px -55% 0px"});
+["top","hello","work","journal","fridge","about","studio","now","contact"].forEach(id=>{ const el = document.getElementById(id); if(el) spy.observe(el); });
+
+// reveal on scroll (IO + fallback: some embedded browsers stall IntersectionObserver)
+const io = new IntersectionObserver(es=> es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target);} }), {threshold:.12});
+document.querySelectorAll(".rv").forEach(el=> io.observe(el));
+function revealCheck(){
+  const h = window.innerHeight;
+  document.querySelectorAll(".rv:not(.in)").forEach(el=>{
+    const r = el.getBoundingClientRect();
+    if(r.top < h * 0.9 && r.bottom > h * 0.08) el.classList.add("in");
+  });
+  // scroll-spy fallback mirrors the IO spy above
+  let cur = "top";
+  ["top","hello","work","journal","fridge","about","studio","now","contact"].forEach(id=>{
+    const el = document.getElementById(id);
+    if(el && el.getBoundingClientRect().top <= h * 0.45) cur = id;
+  });
+  document.querySelectorAll(".dock a").forEach(a=> a.classList.toggle("active", a.dataset.sec===cur));
+  if(APPS[cur]) $("#appName").textContent = APPS[cur];
+}
+addEventListener("scroll", revealCheck, {passive:true});
+setInterval(revealCheck, 800);
+revealCheck();
+
+// hidden admin panel (#admin): manage work + journal on this device
+const ADMIN_KEY = "haniaOS_content_v1", ADMIN_PW = "haniaOS_admin_pw";
+let editWork = -1, editPost = -1;
+function saveLocal(){ try{ localStorage.setItem(ADMIN_KEY, JSON.stringify({projects:PROJECTS, posts:POSTS})); }catch(e){} }
+function isAdminOpen(){ return $("#admin").classList.contains("open"); }
+function openAdmin(){
+  $("#admin").classList.add("open");
+  const hasPw = !!localStorage.getItem(ADMIN_PW);
+  $("#adminGate").hidden = false; $("#adminPanel").hidden = true;
+  $("#adminKicker").textContent = "admin/ · locked";
+  $("#gateTitle").textContent = hasPw ? "Enter passphrase" : "Set your passphrase";
+  $("#gateHint").textContent = hasPw ? "Type your admin passphrase to manage work projects and journal writings." : "First run: choose a passphrase. Only this browser knows it, and only you can open this panel from it.";
+  $("#adminPwInput").value = "";
+  setTimeout(()=> $("#adminPwInput").focus(), 100);
+}
+function closeAdmin(){ $("#admin").classList.remove("open"); if(location.hash === "#admin" || location.hash === "#/admin"){ location.hash = "#top"; } }
+function unlockAdmin(){
+  const v = $("#adminPwInput").value;
+  const saved = localStorage.getItem(ADMIN_PW);
+  if(!saved){ if(v.trim().length < 4){ $("#gateHint").textContent = "Pick at least 4 characters."; return; } localStorage.setItem(ADMIN_PW, v); }
+  else if(v !== saved){ $("#gateHint").textContent = "Wrong passphrase. Try again."; $("#adminPwInput").value = ""; return; }
+  $("#adminGate").hidden = true; $("#adminPanel").hidden = false;
+  $("#adminKicker").textContent = "admin/ · unlocked";
+  refreshAdminLists(); refreshExport();
+}
+function checkAdminHash(){ if(location.hash === "#admin" || location.hash === "#/admin"){ if(!isAdminOpen()) openAdmin(); } else if(isAdminOpen()){ closeAdmin(); } }
+addEventListener("hashchange", checkAdminHash);
+addEventListener("keydown", e=>{ if(e.key === "Escape" && isAdminOpen()) closeAdmin(); });
+$("#adminUnlockBtn").onclick = unlockAdmin;
+$("#adminPwInput").addEventListener("keydown", e=>{ if(e.key === "Enter") unlockAdmin(); });
+$("#adminCloseBtn").onclick = closeAdmin;
+$("#admin").addEventListener("click", e=>{ if(e.target.id === "admin") closeAdmin(); });
+document.querySelectorAll(".atab").forEach(b=> b.onclick = ()=>{
+  document.querySelectorAll(".atab").forEach(x=> x.classList.remove("active")); b.classList.add("active");
+  ["work","journal","backup"].forEach(t=> $("#atab-" + t).hidden = t !== b.dataset.t);
+  if(b.dataset.t === "backup") refreshExport();
+});
+function refreshAdminLists(){
+  const wl = $("#adminWorkList"); wl.innerHTML = "";
+  PROJECTS.forEach((p,i)=>{
+    const r = document.createElement("div"); r.className = "arow";
+    r.innerHTML = '<span class="t"><b></b><span></span></span><span class="arowbtns"><button class="abtn" data-a="e">Edit</button><button class="abtn danger" data-a="d">Delete</button></span>';
+    r.querySelector("b").textContent = p.title; r.querySelector(".t span").textContent = p.status + " · " + p.kind;
+    r.querySelector('[data-a="e"]').onclick = ()=>{
+      editWork = i;
+      $("#awTitle").value = p.title; $("#awKind").value = p.kind; $("#awStatus").value = p.status;
+      $("#awDesc").value = p.desc; $("#awStack").value = p.stack; $("#awUrl").value = p.url; $("#awLive").value = p.live; $("#awImg").value = p.img;
+      $("#awStory").value = String(p.story || "").replace(/<br\s*\/?>/gi, "\n").replace(/<\/?[^>]+>/g, "");
+      $("#awSaveBtn").textContent = "Save changes"; $("#awCancelBtn").hidden = false;
+      $("#awTitle").focus();
+    };
+    r.querySelector('[data-a="d"]').onclick = ()=>{
+      if(!confirm('Delete "' + p.title + '"?')) return;
+      PROJECTS.splice(i,1); editWork = -1; clearWorkForm(); saveLocal(); renderWork(); updateCounts(); refreshAdminLists(); refreshExport();
+    };
+    wl.appendChild(r);
+  });
+  const pl = $("#adminPostList"); pl.innerHTML = "";
+  POSTS.forEach((p,i)=>{
+    const r = document.createElement("div"); r.className = "arow";
+    r.innerHTML = '<span class="t"><b></b><span></span></span><span class="arowbtns"><button class="abtn" data-a="e">Edit</button><button class="abtn danger" data-a="d">Delete</button></span>';
+    r.querySelector("b").textContent = p.t; r.querySelector(".t span").textContent = p.d + " · " + p.k;
+    r.querySelector('[data-a="e"]').onclick = ()=>{
+      editPost = i;
+      $("#ajTitle").value = p.t; $("#ajDate").value = p.d; $("#ajTag").value = p.k;
+      $("#ajBody").value = String(p.b).replace(/<hr\s*\/?>/gi, "\n\n---\n\n").replace(/<br\s*\/?>/gi, "\n").replace(/<\/?[^>]+>/g, "");
+      $("#ajSaveBtn").textContent = "Save changes"; $("#ajCancelBtn").hidden = false;
+      $("#ajTitle").focus();
+    };
+    r.querySelector('[data-a="d"]').onclick = ()=>{
+      if(!confirm('Delete "' + p.t + '"?')) return;
+      POSTS.splice(i,1); editPost = -1; clearPostForm(); saveLocal(); renderJournal(); updateCounts(); refreshAdminLists(); refreshExport();
+    };
+    pl.appendChild(r);
+  });
+}
+function clearWorkForm(){ editWork = -1; ["awTitle","awKind","awDesc","awStack","awStory","awUrl","awLive","awImg"].forEach(id=> $("#"+id).value = ""); $("#awStatus").value = "Live"; $("#awSaveBtn").textContent = "Add project"; $("#awCancelBtn").hidden = true; }
+$("#awCancelBtn").onclick = clearWorkForm;
+$("#awSaveBtn").onclick = ()=>{
+  const t = $("#awTitle").value.trim();
+  if(!t){ $("#awTitle").focus(); return; }
+  const obj = {title:t, kind:$("#awKind").value.trim() || "Web", status:$("#awStatus").value, desc:$("#awDesc").value.trim(), stack:$("#awStack").value.trim(), url:$("#awUrl").value.trim(), live:$("#awLive").value.trim() || $("#awUrl").value.trim(), img:$("#awImg").value.trim(), story:bodyToHtml($("#awStory").value.trim())};
+  if(editWork >= 0) PROJECTS[editWork] = obj; else PROJECTS.push(obj);
+  clearWorkForm(); saveLocal(); renderWork(); updateCounts(); refreshAdminLists(); refreshExport();
+};
+function clearPostForm(){ editPost = -1; ["ajTitle","ajDate","ajTag","ajBody"].forEach(id=> $("#"+id).value = ""); $("#ajSaveBtn").textContent = "Add writing"; $("#ajCancelBtn").hidden = true; }
+$("#ajCancelBtn").onclick = clearPostForm;
+function bodyToHtml(s){
+  if(/<[a-z][\s\S]*>/i.test(s)) return s;
+  return s.split(/\n\s*\n/).map(par=>{ const t = par.trim(); if(/^(---|\*\*\*)$/.test(t)) return "<hr>"; return t.replace(/\n/g, "<br>"); }).filter(Boolean).join("<br><br>");
+}
+$("#ajSaveBtn").onclick = ()=>{
+  const t = $("#ajTitle").value.trim();
+  if(!t){ $("#ajTitle").focus(); return; }
+  const obj = {d:$("#ajDate").value.trim() || new Date().toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric"}), k:$("#ajTag").value.trim() || "Notes", t:t, b:bodyToHtml($("#ajBody").value.trim())};
+  if(editPost >= 0) POSTS[editPost] = obj; else POSTS.push(obj);
+  clearPostForm(); saveLocal(); renderJournal(); updateCounts(); refreshAdminLists(); refreshExport();
+};
+function refreshExport(){ $("#adminExport").value = JSON.stringify({projects:PROJECTS, posts:POSTS}, null, 2); }
+$("#adminCopyBtn").onclick = function(){ refreshExport(); navigator.clipboard.writeText($("#adminExport").value).then(()=>{ const o = this.textContent; this.textContent = "Copied ✓"; setTimeout(()=> this.textContent = o, 1400); }); };
+$("#adminDownloadBtn").onclick = ()=>{
+  refreshExport();
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([$("#adminExport").value], {type:"application/json"}));
+  a.download = "hania-os-backup.json"; a.click();
+  setTimeout(()=> URL.revokeObjectURL(a.href), 2000);
+};
+$("#adminEmailBtn").onclick = function(){
+  refreshExport();
+  const btn = this;
+  const send = ()=>{
+    btn.textContent = "Copied, opening mail...";
+    setTimeout(()=> btn.textContent = "Email backup", 2000);
+    window.location.href = "mailto:haniafayyaz25@gmail.com?subject=" + encodeURIComponent("Hania OS backup") + "&body=" + encodeURIComponent("Hi, my latest Hania OS backup is pasted below. Please bake it into the site.\n\n--- paste backup under this line ---");
+  };
+  if(navigator.clipboard) navigator.clipboard.writeText($("#adminExport").value).then(send, send);
+  else send();
+};
+$("#adminImportBtn").onclick = ()=>{
+  try{
+    const data = JSON.parse($("#adminExport").value);
+    if(!Array.isArray(data.projects) || !Array.isArray(data.posts)){ alert("That file does not look like a Hania OS backup."); return; }
+    PROJECTS.length = 0; data.projects.forEach(p=> PROJECTS.push(p));
+    POSTS.length = 0; data.posts.forEach(p=> POSTS.push(p));
+    editWork = -1; editPost = -1; clearWorkForm(); clearPostForm();
+    saveLocal(); renderWork(); renderJournal(); updateCounts(); refreshAdminLists();
+  }catch(e){ alert("Could not read that JSON."); }
+};
+$("#adminResetBtn").onclick = ()=>{
+  if(!confirm("Throw away your edits and go back to the built-in work + journal?")) return;
+  PROJECTS.length = 0; DEFAULT_PROJECTS.forEach(p=> PROJECTS.push(JSON.parse(JSON.stringify(p))));
+  POSTS.length = 0; DEFAULT_POSTS.forEach(p=> POSTS.push(JSON.parse(JSON.stringify(p))));
+  try{ localStorage.removeItem(ADMIN_KEY); }catch(e){}
+  editWork = -1; editPost = -1; clearWorkForm(); clearPostForm();
+  renderWork(); renderJournal(); updateCounts(); refreshAdminLists(); refreshExport();
+};
+$("#adminPwBtn").onclick = ()=>{
+  const v = $("#adminPwNew").value;
+  if(v.trim().length < 4){ $("#adminPwNew").focus(); return; }
+  localStorage.setItem(ADMIN_PW, v); $("#adminPwNew").value = "";
+  $("#adminPwNew").placeholder = "Updated ✓";
+  setTimeout(()=> $("#adminPwNew").placeholder = "New passphrase", 1500);
+};
+$("#adminLockBtn").onclick = ()=>{ openAdmin(); };
+checkAdminHash();
+
+// playable terminal: type under the prompt
+(function(){
+  const term = document.querySelector(".term"); if(!term) return;
+  const cur = term.querySelector(".cursor"); if(cur) cur.style.display = "none";
+  const log = document.createElement("div"); log.id = "termLog"; term.appendChild(log);
+  const row = document.createElement("div");
+  row.innerHTML = '<span class="g">hania@studio:~$</span> <input id="termInput" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="terminal input">';
+  term.appendChild(row);
+  const input = row.querySelector("input");
+  const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+  function say(html){ const d = document.createElement("div"); d.innerHTML = html; log.appendChild(d); while(log.children.length > 40) log.removeChild(log.firstChild); }
+  const chaiLines = ["brewing... ok, one cup. back to work.", "chai stocks: full. load-shedding: survived.", "you type, i pour. deal."];
+  let chaiN = 0;
+  const cmds = {
+    help: () => "try: whoami · work · journal · hire · rates · chai · clear",
+    whoami: () => "hania, 17, lahore. design + code, both mine.",
+    work: () => PROJECTS.map(p=> esc(p.title) + " [" + esc(p.status) + "]").join("<br>"),
+    journal: () => POSTS.map(p=> esc(p.t)).join("<br>"),
+    hire: () => 'say salam: <a href="mailto:haniafayyaz25@gmail.com">email</a> · <a href="https://wa.me/923264566466" target="_blank" rel="noopener">whatsapp</a>',
+    rates: () => "every quote starts with salam. landing pages, stores, brand kits. email me and we talk numbers over chai.",
+    chai: () => chaiLines[chaiN++ % chaiLines.length],
+    sudo: () => "permission denied. only hania has sudo. have chai instead.",
+    salam: () => "Assalam-o-Alaikum! say hi at haniafayyaz25@gmail.com",
+    hello: () => "Assalam-o-Alaikum! say hi at haniafayyaz25@gmail.com"
+  };
+  input.addEventListener("keydown", e=>{
+    if(e.key !== "Enter") return;
+    const raw = input.value.trim(); input.value = "";
+    if(!raw) return;
+    say('<span class="g">hania@studio:~$</span> ' + esc(raw));
+    const c = raw.toLowerCase().split(/\s+/)[0];
+    if(c === "clear"){ log.innerHTML = ""; return; }
+    say(cmds[c] ? cmds[c]() : "command not found: " + esc(raw) + ". try 'help'.");
+  });
+})();
+function escHtml(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+// shared modal action row: receipts for work, cards for journal
+let modalMode = null, modalIdx = -1;
+function modalActions(kind, i){
+  modalMode = kind; modalIdx = i;
+  const old = $("#modalActions"); if(old) old.remove();
+  const row = document.createElement("div"); row.id = "modalActions";
+  if(kind === "work"){
+    row.innerHTML = '<button class="btn btn-solid" id="mVisit">Visit live site</button><button class="btn btn-line" id="mReceipt">Receipt</button>';
+  }else{
+    row.innerHTML = '<button class="btn btn-solid" id="mCard">Make it a card</button>';
+  }
+  $("#modalBox .mbody").appendChild(row);
+  if(kind === "work"){
+    const p = PROJECTS[i];
+    $("#mVisit").onclick = ()=> window.open(p.live, "_blank", "noopener");
+    $("#mReceipt").onclick = ()=> showReceipt(i);
+  }else{
+    $("#mCard").onclick = ()=> makeQuoteCard(i);
+  }
+}
+// project receipts
+function showReceipt(i){
+  const p = PROJECTS[i];
+  $("#modalKicker").textContent = "receipt #" + (1001 + i);
+  $("#modalBody").innerHTML =
+    '<div class="receipt"><h4>HANIA OS</h4><div class="rc">thank you for stopping by</div><hr>' +
+    '<div class="rr"><span>order</span><span>#' + (1001 + i) + '</span></div>' +
+    '<div class="rr"><span>item</span><span>' + escHtml(p.title) + '</span></div>' +
+    '<div class="rr"><span>kind</span><span>' + escHtml(p.kind) + '</span></div>' +
+    '<div class="rr"><span>status</span><span>' + escHtml(p.status) + '</span></div>' +
+    '<div class="rr"><span>stack</span><span>' + escHtml(p.stack) + '</span></div><hr>' +
+    '<div class="rr tot"><span>total</span><span>paid in chai</span></div><hr>' +
+    '<div class="rc">3G-fast · made with chai at 3am<br>say salam · hania os</div></div>';
+  const old = $("#modalActions"); if(old) old.remove();
+  const row = document.createElement("div"); row.id = "modalActions";
+  row.innerHTML = '<button class="btn btn-solid" id="mDl">Download image</button><button class="btn btn-line" id="mBack">Back</button>';
+  $("#modalBox .mbody").appendChild(row);
+  $("#mBack").onclick = ()=> openWork(i);
+  $("#mDl").onclick = ()=> downloadReceipt(i);
+}
+function downloadReceipt(i){
+  const p = PROJECTS[i];
+  const c = document.createElement("canvas"); c.width = 480; c.height = 640;
+  const x = c.getContext("2d");
+  x.fillStyle = "#fdf6ea"; x.fillRect(0,0,480,640);
+  x.strokeStyle = "#795236"; x.lineWidth = 3; x.strokeRect(14,14,452,612);
+  x.fillStyle = "#795236"; x.textAlign = "center";
+  x.font = "700 30px 'JetBrains Mono', monospace";
+  x.fillText("HANIA OS", 240, 80);
+  x.font = "400 17px 'JetBrains Mono', monospace";
+  x.fillText("thank you for stopping by", 240, 112);
+  function dash(y){ x.save(); x.setLineDash([8,7]); x.strokeStyle = "#79523688"; x.lineWidth = 2; x.beginPath(); x.moveTo(44,y); x.lineTo(436,y); x.stroke(); x.restore(); return y + 34; }
+  function wrap(s, n){ const ws = String(s).split(" "); const out = []; let cur = ""; ws.forEach(w=>{ if((cur + " " + w).trim().length > n){ out.push(cur.trim()); cur = w; } else { cur += " " + w; } }); if(cur.trim()) out.push(cur.trim()); return out.length ? out : [""]; }
+  function rows(label, val, y){ x.textAlign = "left"; x.font = "400 18px 'JetBrains Mono', monospace"; x.fillStyle = "#795236"; x.fillText(label, 44, y); x.textAlign = "right"; x.fillStyle = "#2e1f13"; const vs = wrap(val, 24); vs.forEach((ln,k)=> x.fillText(ln, 436, y + k * 26)); return y + vs.length * 26 + 10; }
+  let y = dash(140);
+  y = rows("order", "#" + (1001 + i), y);
+  y = rows("item", p.title, y);
+  y = rows("kind", p.kind, y);
+  y = rows("status", p.status, y);
+  y = rows("stack", p.stack, y);
+  y = dash(y);
+  x.textAlign = "left"; x.font = "700 20px 'JetBrains Mono', monospace"; x.fillStyle = "#795236"; x.fillText("total", 44, y);
+  x.textAlign = "right"; x.fillText("paid in chai", 436, y);
+  y = dash(y + 30);
+  x.textAlign = "center"; x.font = "400 17px 'JetBrains Mono', monospace"; x.fillStyle = "#795236";
+  x.fillText("3G-fast · made with chai at 3am", 240, y);
+  x.fillText("say salam · hania os", 240, y + 30);
+  const a = document.createElement("a");
+  a.href = c.toDataURL("image/png");
+  a.download = "hania-os-receipt-" + p.title.toLowerCase().replace(/[^a-z0-9]+/g, "-") + ".png";
+  a.click();
+}
+// essay quote cards (1080x1080 for stories)
+function pickLine(p){
+  try{
+    const sel = window.getSelection();
+    if(sel && sel.anchorNode && $("#modalBody").contains(sel.anchorNode)){
+      const s = sel.toString().trim();
+      if(s.length > 10 && s.length < 280) return s;
+    }
+  }catch(e){}
+  const text = ($("#modalTitle").textContent + ". " + $("#modalBody").innerText).replace(/\s+/g, " ");
+  const sents = text.split(/(?<=[.?!]) +/).map(s=> s.trim()).filter(s=> s.length > 20 && s.length <= 140);
+  if(sents.length){ sents.sort((a,b)=> b.length - a.length); return sents[0]; }
+  return p.t;
+}
+function makeQuoteCard(i){
+  const p = POSTS[i];
+  const line = pickLine(p);
+  const c = document.createElement("canvas"); c.width = 1080; c.height = 1080;
+  const x = c.getContext("2d");
+  x.fillStyle = "#f1dfc4"; x.fillRect(0,0,1080,1080);
+  x.strokeStyle = "#795236"; x.lineWidth = 6; x.strokeRect(36,36,1008,1008);
+  x.textAlign = "center"; x.fillStyle = "#b96858";
+  x.font = "400 64px Fraunces, Georgia, serif";
+  x.fillText("✦", 540, 175);
+  const size = line.length > 90 ? 50 : 62;
+  x.fillStyle = "#2e1f13";
+  x.font = "italic 500 " + size + "px Fraunces, Georgia, serif";
+  const words = line.split(/\s+/); const lines = []; let cur = "";
+  words.forEach(w=>{ const t = (cur + " " + w).trim(); if(x.measureText(t).width > 840){ lines.push(cur.trim()); cur = w; } else { cur = t; } });
+  if(cur.trim()) lines.push(cur.trim());
+  let y = 540 - (lines.length - 1) * size * 0.7;
+  lines.forEach(ln=>{ x.fillText(ln, 540, y); y += size * 1.3; });
+  x.font = "700 30px 'JetBrains Mono', monospace"; x.fillStyle = "#607044";
+  x.fillText((p.d + " · " + p.k).toUpperCase(), 540, 885);
+  x.font = "400 28px 'JetBrains Mono', monospace"; x.fillStyle = "#795236";
+  x.fillText("hania fayyaz · hania os", 540, 935);
+  const a = document.createElement("a");
+  a.href = c.toDataURL("image/png");
+  a.download = "hania-quote-" + i + ".png";
+  a.click();
+}
+// guestbook fridge
+const FRIDGE_KEY = "haniaOS_fridge_v1";
+const FRIDGE_SEEDS = [
+  {n:"Hania", t:"stuck the first note. be kind or be funny."},
+  {n:"A 3am scroller", t:"your terminal understood me better than my cs teacher."},
+  {n:"Future client", t:"saving this tab for when my budget grows up."}
+];
+function getFridge(){
+  try{
+    const raw = localStorage.getItem(FRIDGE_KEY);
+    if(raw){ const d = JSON.parse(raw); if(Array.isArray(d)) return d; }
+  }catch(e){}
+  return JSON.parse(JSON.stringify(FRIDGE_SEEDS));
+}
+function saveFridge(notes){ try{ localStorage.setItem(FRIDGE_KEY, JSON.stringify(notes.slice(0,30))); }catch(e){} }
+function renderFridge(){
+  const g = $("#fridgeGrid"); if(!g) return; g.innerHTML = "";
+  const notes = getFridge();
+  notes.forEach(n=>{
+    const d = document.createElement("div"); d.className = "sticky";
+    const t = document.createElement("span"); t.textContent = n.t;
+    const b = document.createElement("b"); b.textContent = "- " + n.n;
+    d.appendChild(t); d.appendChild(b); g.appendChild(d);
+  });
+  const ft = $("#fridgeTitle");
+  if(ft) ft.textContent = "fridge/ · " + notes.length + (notes.length === 1 ? " note" : " notes");
+}
+$("#frStickBtn").onclick = ()=>{
+  const n = $("#frName").value.trim().slice(0,24) || "anon";
+  const t = $("#frNote").value.trim().slice(0,120);
+  if(!t){ $("#frNote").focus(); return; }
+  const notes = getFridge(); notes.unshift({n:n, t:t});
+  saveFridge(notes); renderFridge();
+  $("#frName").value = ""; $("#frNote").value = "";
+};
+renderFridge();
+</script>
