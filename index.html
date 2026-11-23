@@ -408,7 +408,6 @@
           <p class="sub">17, Lahore. I design and build calm, warm websites, identities, and essays. Tell me what you are cooking and what you need: a landing page, a store, a brand refresh, or just feedback.</p>
           <div class="contact-row">
             <a class="btn btn-solid btn-big" href="mailto:haniafayyaz25@gmail.com?subject=Salam%20Hania">Say salam →</a>
-            <a class="btn btn-line btn-big" href="https://wa.me/923264566466" target="_blank" rel="noopener">WhatsApp ↗</a>
             <a class="btn btn-line btn-big" href="#work">See the work →</a>
           </div>
           <p style="margin-top:1.2rem"><a class="link-quiet" href="mailto:haniafayyaz25@gmail.com">haniafayyaz25@gmail.com</a></p>
@@ -542,12 +541,10 @@
           <p class="sub">A website, a visual identity, a story, or just a question. My inbox is a friendly place.</p>
           <div class="contact-row">
             <a class="btn btn-solid btn-big" href="mailto:haniafayyaz25@gmail.com">Say salam →</a>
-            <a class="btn btn-line btn-big" href="https://wa.me/923264566466" target="_blank" rel="noopener">WhatsApp ↗</a>
             <a class="btn btn-line btn-big" href="https://www.linkedin.com/in/hania-fayyaz-dev/" target="_blank" rel="noopener">LinkedIn ↗</a>
           </div>
           <div class="copies">
             <button class="fbtn" id="copyEmailBtn">Copy email</button>
-            <button class="fbtn" id="copyWaBtn">Copy WhatsApp link</button>
           </div>
           <p style="margin-top:1.4rem"><a class="link-quiet" href="mailto:haniafayyaz25@gmail.com">haniafayyaz25@gmail.com</a></p>
         </div>
@@ -565,7 +562,7 @@
     <div><p class="eyebrow" style="margin-bottom:1rem">Elsewhere</p>
       <ul><li><a href="mailto:haniafayyaz25@gmail.com">haniafayyaz25@gmail.com</a></li>
       <li><a href="https://www.linkedin.com/in/hania-fayyaz-dev/" target="_blank" rel="noopener">LinkedIn ↗</a></li>
-      <li><a href="https://wa.me/923264566466" target="_blank" rel="noopener">WhatsApp ↗</a></li></ul></div>
+      </ul></div>
   </div>
   <div class="shell fbottom" style="display:flex;flex-wrap:wrap;gap:.8rem;justify-content:space-between;border-top:1px solid var(--border);padding-top:1.1rem;margin-top:2rem;font-size:.8rem;color:var(--muted)"><span>© 2026 Hania Fayyaz</span><span>made with chai at 3am · I make ideas tangible.</span></div>
 </footer>
@@ -739,10 +736,9 @@ document.querySelectorAll(".fbtn").forEach(b=> b.onclick = ()=>{
   curFilter = b.dataset.f; renderWork();
 });
 
-// copy email / whatsapp
+// copy email
 function flashCopy(btn, txt){ const o = btn.textContent; navigator.clipboard.writeText(txt).then(()=>{ btn.textContent = "Copied ✓"; setTimeout(()=> btn.textContent = o, 1400); }); }
 document.getElementById("copyEmailBtn").onclick = function(){ flashCopy(this, "haniafayyaz25@gmail.com"); };
-document.getElementById("copyWaBtn").onclick = function(){ flashCopy(this, "https://wa.me/923264566466"); };
 
 // work quick view
 function openWork(i){
@@ -991,7 +987,7 @@ checkAdminHash();
     whoami: () => "hania, 17, lahore. design + code, both mine.",
     work: () => PROJECTS.map(p=> esc(p.title) + " [" + esc(p.status) + "]").join("<br>"),
     journal: () => POSTS.map(p=> esc(p.t)).join("<br>"),
-    hire: () => 'say salam: <a href="mailto:haniafayyaz25@gmail.com">email</a> · <a href="https://wa.me/923264566466" target="_blank" rel="noopener">whatsapp</a>',
+    hire: () => 'say salam: <a href="mailto:haniafayyaz25@gmail.com">email</a>',
     rates: () => "every quote starts with salam. landing pages, stores, brand kits. email me and we talk numbers over chai.",
     chai: () => chaiLines[chaiN++ % chaiLines.length],
     sudo: () => "permission denied. only hania has sudo. have chai instead.",
